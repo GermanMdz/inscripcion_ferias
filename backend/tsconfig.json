@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    /* Directorios */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Módulos y entorno */
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "types": ["node"],
+
+    /* Código generado */
+    "sourceMap": true,
+    "noEmit": false,
+
+    /* Strictez */
+    "strict": true,
+    "skipLibCheck": true,
+
+    /* Importaciones */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Opciones recomendadas para backend */
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
