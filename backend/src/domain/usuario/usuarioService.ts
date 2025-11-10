@@ -1,4 +1,4 @@
-import { crearUsuarioRepo } from "../../api/usuario/usuarioRepository";
+import { crearUsuarioRepo } from "../../infra/repositories/usuarioRepository";
 import { Usuario } from "./usuario";
 
 export class UsuarioService {

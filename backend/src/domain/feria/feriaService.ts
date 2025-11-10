@@ -1,4 +1,4 @@
-import { crearFeriaRepo, obtenerCantidadRepo, buscarFeria } from "../../infra/feriaRepository";
+import { crearFeriaRepo, obtenerCantidadRepo, buscarFeria } from "../../infra/repositories/feriaRepository";
 import { Feria } from "./feria";
 
 export class FeriaService {
