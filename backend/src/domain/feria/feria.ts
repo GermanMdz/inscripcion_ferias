@@ -1,10 +1,12 @@
-// Entidad de dominio (sin dependencias de infraestructura)
 export class Feria {
   id?: number;
   nombre: string;
+  fecha?: Date;
+  ubicacion?: string;
+  cupo?: number;
   createdAt?: Date;
 
-  constructor(nombre: string) {
+  constructor(nombre: string, fecha?: Date, ubicacion?: string, cupo?: number) {
     if (!nombre || nombre.trim() === "") {
       throw new Error("El nombre de la feria no puede estar vacío");
     }

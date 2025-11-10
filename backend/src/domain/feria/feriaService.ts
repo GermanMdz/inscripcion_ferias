@@ -1,11 +1,14 @@
-import { crearFeriaRepo, obtenerCantidadRepo } from "./feriaRepository";
+import { crearFeriaRepo, obtenerCantidadRepo, buscarFeria } from "../../infra/feriaRepository";
 import { Feria } from "./feria";
 
 export class FeriaService {
     
-    async crear(nombre: string): Promise<Feria> {
-        const domain = new Feria(nombre);
-        return await crearFeriaRepo(domain);
+    async crear(feria: Feria): Promise<Feria> {
+        const feriaExiste = await buscarFeria(feria);
+        if (feriaExiste) {
+            throw new Error("La feria ya existe");
+        }
+        return crearFeriaRepo(feria);
     }
 
     // async inscribirUsuarioAFeria(userId: number, feriaId: number) {
