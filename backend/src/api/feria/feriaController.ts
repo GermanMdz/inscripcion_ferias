@@ -12,6 +12,17 @@ export const crearFeria = async (req: Request, res: Response) => {
     }
 };
 
+export const obtenerFerias = async (req: Request, res: Response) => {
+    try {
+        const ferias = await feriaService.obtenerFerias(); // ahora es array
+        const feriasDto = ferias.map(feriaMapper.fromDomainToDto);
+        return res.status(200).json(feriasDto); // 200 OK
+    } catch (e: any) {
+        return res.status(400).json({ error: e.message });
+    }
+};
+
+
 export const inscribirUsuarioAFeria = async (req: Request, res: Response) => {
     try {
         // const inscripcion = await feriaService.inscribirUsuarioAFeria(idUsuario, idFeria);

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Directorios */
-    "rootDir": "./src",
+    "rootDir": "../",
     "outDir": "./dist",
 
     /* Módulos y entorno */
@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "target": "es2021",
     "lib": ["es2021"],
-    "types": ["node"],
+    "types": ["jest", "node"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
 
@@ -32,6 +32,6 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true
   },
-  "include": ["src"],
+  "include": ["src", "test"],
   "exclude": ["node_modules"]
 }

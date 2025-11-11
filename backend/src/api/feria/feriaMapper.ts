@@ -10,4 +10,12 @@ export class feriaMapper {
         feria.createdAt = entity.createdAt;
         return feria;
     }
+
+    static fromDomainToDto(feria: Feria) {
+        return {
+            nombre: feria.nombre,
+            fecha: feria.fecha,
+            direccion: feria.ubicacion
+        };
+    }
 }

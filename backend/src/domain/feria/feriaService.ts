@@ -11,6 +11,16 @@ export class FeriaService {
         return crearFeriaRepo(feria);
     }
 
+    async obtenerFerias(): Promise<Feria[]> {
+        // Hardcodeo de ejemplo
+        const ferias = [
+            new Feria("Feria de Ciencias", new Date("2024-12-01"), "Calle Falsa 123"),
+            new Feria("Feria de Arte", new Date("2024-12-15"), "Avenida Siempre Viva 456"),
+        ];
+        return ferias;
+    }
+
+
     // async inscribirUsuarioAFeria(userId: number, feriaId: number) {
     //     const usuario = await usuarioRepo.findById(userId);
     //     const feria = await feriaRepo.findById(feriaId);
