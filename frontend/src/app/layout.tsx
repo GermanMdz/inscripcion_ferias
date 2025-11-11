@@ -31,7 +31,7 @@ export default function RootLayout({
         <header>
           <nav className="bg-gray-800 p-4 text-white">
             <Link href="/" className="mr-4">Home</Link>
-            <Link href="/posts" className="mr-4">Posts</Link>
+            <Link href="/feria" className="mr-4">Ferias</Link>
             <Link href="/about">About</Link>
           </nav>
         </header>

@@ -3,7 +3,6 @@ import feriaRoutes from "./api/feria/feriaRoutes";
 import usuarioRoutes from "./api/usuario/usuarioRoutes";
 import "reflect-metadata";
 import cors from "cors";
-import { API_ROUTES } from "../../shared/routes";
 
 const app = express();
 
@@ -13,8 +12,8 @@ app.use(cors({
   origin: "http://localhost:3000",
 }));
 
-app.use(API_ROUTES.feria.base, feriaRoutes);
-app.use(API_ROUTES.usuario.base, usuarioRoutes);
+app.use("/feria", feriaRoutes);
+app.use("/usuario", usuarioRoutes);
 // curl en powershell
 // curl -Uri "http://localhost:3000/ferias/crear" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{ "nombre": "Test2" }'
 

@@ -5,7 +5,7 @@ import { feriaMapper } from "../mappers/feriaMapper";
 
 const repo = () => AppDataSource.getRepository(FeriaEntity);
 
-export async function crearFeriaRepo(domainFeria: Feria): Promise<Feria> {
+export async function crearFeriaRepo(domainFeria: Feria) {
     const r = repo();
     const feria = feriaMapper.fromDomainToEntity(domainFeria);
     const entity = r.create(feria);
@@ -13,7 +13,7 @@ export async function crearFeriaRepo(domainFeria: Feria): Promise<Feria> {
     return feriaMapper.fromEntityToDomain(saved);
 }
 
-export async function buscarFeria(domainFeria: Feria): Promise<Feria | null> {
+export async function obtenerFeriaPorNombre(domainFeria: Feria) {
     const r = repo();
     const feria = feriaMapper.fromDomainToEntity(domainFeria);
     const found = await r.findOneBy({ nombre: feria.nombre });
@@ -21,7 +21,20 @@ export async function buscarFeria(domainFeria: Feria): Promise<Feria | null> {
     return feriaMapper.fromEntityToDomain(found);
 }
 
-export async function obtenerCantidadRepo(): Promise<{ cantidad: number }> {
+export async function obtenerFeriaPorId(idFeria: number) {
+    const r = repo();
+    const found = await r.findOneBy({ id: idFeria });
+    if (!found) return null;
+    return feriaMapper.fromEntityToDomain(found);
+}
+
+export async function obtenerFerias() {
+    const r = repo();
+    const ferias = await r.find();
+    return ferias.map(feriaMapper.fromEntityToDomain);
+}
+
+export async function obtenerCantidadRepo() {
     const r = repo();
     const cantidad = await r.count();
     return { cantidad };

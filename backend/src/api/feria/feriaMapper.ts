@@ -13,6 +13,7 @@ export class feriaMapper {
 
     static fromDomainToDto(feria: Feria) {
         return {
+            id: feria.id,
             nombre: feria.nombre,
             fecha: feria.fecha,
             direccion: feria.ubicacion

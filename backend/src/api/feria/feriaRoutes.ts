@@ -1,13 +1,12 @@
 import { Router } from "express";
-import { crearFeria, cantidadFeria, obtenerFerias } from "./feriaController";
-import { API_ROUTES } from "../../../../shared/routes";
+import { crearFeria, cantidadFeria, obtenerFerias, obtenerFeriaPorId } from "./feriaController";
 
 const router = Router();
 
-// router.get("/", obtenerFerias);
-router.post(API_ROUTES.feria.crear, crearFeria);
-// router.post(API_ROUTES.feria.detalle, detalleFeria);
-// router.post(API_ROUTES.feria.obtenerCantidad, cantidadFeria);
+router.get("/", obtenerFerias);
+router.get("/:id", obtenerFeriaPorId);
+router.post("/crear", crearFeria);
+router.post("/cantidad", cantidadFeria);
 
 export default router;
 

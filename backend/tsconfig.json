@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Directorios */
-    "rootDir": "../",
+    "rootDir": "../backend",
     "outDir": "./dist",
 
     /* Módulos y entorno */

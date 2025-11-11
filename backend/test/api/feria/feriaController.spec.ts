@@ -15,6 +15,7 @@ jest.mock('../../../src/domain/feria/feriaService', () => ({
 jest.mock('../../../src/api/feria/feriaMapper', () => ({
   feriaMapper: {
     fromDtoToDomain: jest.fn(),
+    fromDomainToDto: jest.fn((feria) => feria),
   },
 }));
 

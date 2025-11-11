@@ -1,10 +1,10 @@
-import { crearFeriaRepo, obtenerCantidadRepo, buscarFeria } from "../../infra/repositories/feriaRepository";
+import { crearFeriaRepo, obtenerCantidadRepo, obtenerFerias, obtenerFeriaPorNombre, obtenerFeriaPorId } from "../../infra/repositories/feriaRepository";
 import { Feria } from "./feria";
 
 export class FeriaService {
     
     async crear(feria: Feria): Promise<Feria> {
-        const feriaExiste = await buscarFeria(feria);
+        const feriaExiste = await obtenerFeriaPorNombre(feria);
         if (feriaExiste) {
             throw new Error("La feria ya existe");
         }
@@ -13,12 +13,21 @@ export class FeriaService {
 
     async obtenerFerias(): Promise<Feria[]> {
         // Hardcodeo de ejemplo
-        const ferias = [
-            new Feria("Feria de Ciencias", new Date("2024-12-01"), "Calle Falsa 123"),
-            new Feria("Feria de Arte", new Date("2024-12-15"), "Avenida Siempre Viva 456"),
-        ];
+        const ferias = await obtenerFerias();
+        if (!ferias || ferias.length === 0) {
+            throw new Error("No hay ferias registradas");
+        }
         return ferias;
     }
+
+    async obtenerFeriaPorId(id: number): Promise<Feria> {
+        // Hardcodeo de ejemplo
+        const feria = await obtenerFeriaPorId(id);
+        if (!feria) {
+            throw new Error("Feria no encontrada");
+        }
+        return feria;
+    }    
 
 
     // async inscribirUsuarioAFeria(userId: number, feriaId: number) {
