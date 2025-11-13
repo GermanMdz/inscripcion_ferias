@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { crearUsuario } from "./usuarioController";
+import * as usuarioController from "./usuarioController";
 
 const router = Router();
 
-router.post("/crear", crearUsuario);
+router.get("/perfil", usuarioController.verPerfil);
+router.post("/perfil", usuarioController.actualizarPerfil);
 
 export default router;
 

@@ -25,9 +25,9 @@ describe('Feria (Domain Entity)', () => {
       expect(() => new Feria('   ')).toThrow('El nombre de la feria no puede estar vacío');
     });
 
-    it('debería aceptar parámetros opcionales: fecha, ubicacion, cupo en el constructor', () => {
+    it('debería aceptar parámetros opcionales: fecha, direccion, cupo en el constructor', () => {
       const fecha = new Date('2025-03-15');
-      // Nota: el constructor actual no asigna fecha, ubicacion, cupo
+      // Nota: el constructor actual no asigna fecha, direccion, cupo
       // Por lo tanto este test valida que el constructor no las rechaza
       const feria = new Feria('Feria de Tecnología', fecha, 'Plaza Central', 100);
 

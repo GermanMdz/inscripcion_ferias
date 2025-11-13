@@ -1,6 +1,6 @@
 import { crearFeria, cantidadFeria } from '../../../src/api/feria/feriaController';
 import { feriaService } from '../../../src/domain/feria/feriaService';
-import { feriaMapper } from '../../../src/api/feria/feriaMapper';
+import { feriaMapper } from '../../../src/api/mappers/feriaMapper';
 import { Request, Response } from 'express';
 
 // Mock del servicio de dominio

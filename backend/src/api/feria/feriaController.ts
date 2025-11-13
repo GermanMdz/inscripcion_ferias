@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
 import { feriaService } from "../../domain/feria/feriaService";
-import { feriaMapper } from "./feriaMapper";
+import { feriaMapper } from "../mappers/feriaMapper";
 
 export const crearFeria = async (req: Request, res: Response) => {
     try {
@@ -15,9 +15,19 @@ export const crearFeria = async (req: Request, res: Response) => {
 
 export const obtenerFerias = async (req: Request, res: Response) => {
     try {
-        const ferias = await feriaService.obtenerFerias(); // ahora es array
+        const ferias = await feriaService.obtenerFerias();
         const feriasDto = ferias.map(feriaMapper.fromDomainToDto);
-        return res.status(200).json(feriasDto); // 200 OK
+        return res.status(200).json(feriasDto);
+    } catch (e: any) {
+        return res.status(400).json({ error: e.message });
+    }
+};
+
+export const obtenerProximasFerias = async (req: Request, res: Response) => {
+    try {
+        const ferias = await feriaService.obtenerProximasFerias();
+        const feriasDto = ferias.map(feriaMapper.fromDomainToDto);
+        return res.status(200).json(feriasDto);
     } catch (e: any) {
         return res.status(400).json({ error: e.message });
     }

@@ -16,7 +16,7 @@ jest.mock('../../../src/infra/mappers/feriaMapper', () => ({
       const feria = new Feria(entity.nombre);
       feria.id = entity.id;
       feria.fecha = entity.fecha;
-      feria.ubicacion = entity.ubicacion;
+      feria.direccion = entity.direccion;
       feria.cupo = entity.cupo;
       feria.createdAt = entity.createdAt;
       return feria;
@@ -25,7 +25,7 @@ jest.mock('../../../src/infra/mappers/feriaMapper', () => ({
       id: domain.id,
       nombre: domain.nombre,
       fecha: domain.fecha,
-      ubicacion: domain.ubicacion,
+      direccion: domain.direccion,
       cupo: domain.cupo,
       createdAt: domain.createdAt,
     })),
@@ -54,7 +54,7 @@ describe('FeriaRepository (Infra Repository)', () => {
         id: 1,
         nombre: 'Feria Nueva',
         fecha: null,
-        ubicacion: null,
+        direccion: null,
         cupo: null,
         createdAt: new Date(),
       };
@@ -78,7 +78,7 @@ describe('FeriaRepository (Infra Repository)', () => {
         id: 2,
         nombre: 'Feria Buscada',
         fecha: null,
-        ubicacion: null,
+        direccion: null,
         cupo: null,
         createdAt: new Date(),
       };
@@ -109,7 +109,7 @@ describe('FeriaRepository (Infra Repository)', () => {
         id: 1,
         nombre: 'Feria Test',
         fecha: null,
-        ubicacion: 'Calle Test',
+        direccion: 'Calle Test',
         cupo: null,
         createdAt: new Date(),
       };
@@ -135,8 +135,8 @@ describe('FeriaRepository (Infra Repository)', () => {
   describe('obtenerFerias', () => {
     it('debería retornar todas las ferias', async () => {
       const foundEntities = [
-        { id: 1, nombre: 'Feria 1', fecha: null, ubicacion: 'Calle 1', cupo: null, createdAt: new Date() },
-        { id: 2, nombre: 'Feria 2', fecha: null, ubicacion: 'Calle 2', cupo: null, createdAt: new Date() },
+        { id: 1, nombre: 'Feria 1', fecha: null, direccion: 'Calle 1', cupo: null, createdAt: new Date() },
+        { id: 2, nombre: 'Feria 2', fecha: null, direccion: 'Calle 2', cupo: null, createdAt: new Date() },
       ];
 
       mockRepository.find.mockResolvedValue(foundEntities);

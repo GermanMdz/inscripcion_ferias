@@ -12,13 +12,25 @@ export class FeriaService {
     }
 
     async obtenerFerias(): Promise<Feria[]> {
-        // Hardcodeo de ejemplo
         const ferias = await obtenerFerias();
         if (!ferias || ferias.length === 0) {
             throw new Error("No hay ferias registradas");
         }
         return ferias;
     }
+
+    async obtenerProximasFerias(): Promise<Feria[]> {
+        const ferias = await this.obtenerFerias();
+        const hoy = new Date();
+        hoy.setDate(hoy.getDate() - 1); // Para incluir las ferias de hoy
+        const proximas = ferias.filter((feria) => {
+            if (!feria.fecha) return false;
+            const fechaFeria = new Date(feria.fecha);
+            return fechaFeria >= hoy;
+        });
+        return proximas;
+        }
+
 
     async obtenerFeriaPorId(id: number): Promise<Feria> {
         // Hardcodeo de ejemplo

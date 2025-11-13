@@ -12,7 +12,13 @@ export class FeriaEntity {
   fecha!: string;
 
   @Column({ nullable: true })
-  ubicacion!: string;
+  horaInicio!: string;
+
+  @Column({ nullable: true })
+  horaFin!: string;
+
+  @Column({ nullable: true })
+  direccion!: string;
 
   @Column({ nullable: true })
   cupo!: number;

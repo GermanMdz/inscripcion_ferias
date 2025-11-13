@@ -9,7 +9,7 @@ describe('FeriaMapper (Infra Mapper)', () => {
       entity.id = 1;
       entity.nombre = 'Feria de Tecnología';
       entity.fecha = '2025-03-15';
-      entity.ubicacion = 'Plaza Mayor';
+      entity.direccion = 'Plaza Mayor';
       entity.cupo = 100;
       entity.createdAt = new Date('2025-01-01');
 
@@ -17,7 +17,7 @@ describe('FeriaMapper (Infra Mapper)', () => {
 
       expect(domain.id).toBe(1);
       expect(domain.nombre).toBe('Feria de Tecnología');
-      expect(domain.ubicacion).toBe('Plaza Mayor');
+      expect(domain.direccion).toBe('Plaza Mayor');
       expect(domain.cupo).toBe(100);
       expect(domain.createdAt).toBe(entity.createdAt);
     });
@@ -27,7 +27,7 @@ describe('FeriaMapper (Infra Mapper)', () => {
       entity.id = 2;
       entity.nombre = 'Feria Simple';
       entity.fecha = null as any;
-      entity.ubicacion = null as any;
+      entity.direccion = null as any;
       entity.cupo = null as any;
       entity.createdAt = new Date();
 
@@ -37,7 +37,7 @@ describe('FeriaMapper (Infra Mapper)', () => {
       expect(domain.nombre).toBe('Feria Simple');
       // El mapper actual devuelve null en lugar de undefined para campos nulos
       expect(domain.fecha).toBeNull();
-      expect(domain.ubicacion).toBeNull();
+      expect(domain.direccion).toBeNull();
       expect(domain.cupo).toBeNull();
     });
   });
@@ -47,14 +47,14 @@ describe('FeriaMapper (Infra Mapper)', () => {
       const domain = new Feria('Feria de Libros');
       domain.id = 3;
       domain.fecha = new Date('2025-04-20');
-      domain.ubicacion = 'Biblioteca Central';
+      domain.direccion = 'Biblioteca Central';
       domain.cupo = 50;
 
       const entity = feriaMapper.fromDomainToEntity(domain);
 
       expect(entity.id).toBe(3);
       expect(entity.nombre).toBe('Feria de Libros');
-      expect(entity.ubicacion).toBe('Biblioteca Central');
+      expect(entity.direccion).toBe('Biblioteca Central');
       expect(entity.cupo).toBe(50);
     });
 
@@ -65,7 +65,7 @@ describe('FeriaMapper (Infra Mapper)', () => {
 
       expect(entity.nombre).toBe('Feria Mínima');
       expect(entity.fecha).toBeUndefined();
-      expect(entity.ubicacion).toBeUndefined();
+      expect(entity.direccion).toBeUndefined();
       expect(entity.cupo).toBeUndefined();
     });
   });

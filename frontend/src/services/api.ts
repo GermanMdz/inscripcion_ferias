@@ -9,6 +9,12 @@ export const feriaService = {
     return res.json();
   },
 
+  getUpcoming: async () => {
+    const res = await fetch(`${API_URL}/feria/proximas`);
+    if (!res.ok) throw new Error("Error al obtener las ferias");
+    return res.json();
+  },
+
   getById: async (id: number) => {
     const res = await fetch(`${API_URL}/feria/${id}`);
     if (!res.ok) throw new Error(`Error al obtener la feria ${id}`);
@@ -21,7 +27,10 @@ export const feriaService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(feria),
     });
-    if (!res.ok) throw new Error("Error al crear la feria");
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(`Error al crear la feria: ${errorData.error }`);
+    }
     return res.json();
   },
 

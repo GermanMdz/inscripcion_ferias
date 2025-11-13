@@ -5,7 +5,9 @@ export class feriaMapper {
         const feria = new Feria(entity.nombre);
         feria.id = entity.id;
         feria.fecha = entity.fecha;
-        feria.ubicacion = entity.ubicacion;
+        feria.horaInicio = entity.horaInicio;
+        feria.horaFin = entity.horaFin;
+        feria.direccion = entity.direccion;
         feria.cupo = entity.cupo;
         feria.createdAt = entity.createdAt;
         return feria;
@@ -16,7 +18,7 @@ export class feriaMapper {
             id: feria.id,
             nombre: feria.nombre,
             fecha: feria.fecha,
-            direccion: feria.ubicacion
+            direccion: feria.direccion
         };
     }
 }

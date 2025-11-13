@@ -107,17 +107,17 @@
   id?: number;
   nombre: string;
   fecha?: Date | undefined;
-  ubicacion?: string | undefined;
+  direccion?: string | undefined;
   cupo?: number | undefined;
   createdAt?: Date | undefined;
 &nbsp;
-  constructor(nombre: string, fecha?: Date, ubicacion?: string, cupo?: number) {
+  constructor(nombre: string, fecha?: Date, direccion?: string, cupo?: number) {
     if (!nombre || nombre.trim() === "") {
       throw new Error("El nombre de la feria no puede estar vacío");
     }
     this.nombre = nombre.trim();
     this.fecha = fecha;
-    this.ubicacion = ubicacion;
+    this.direccion = direccion;
     this.cupo = cupo;
     // this.createdAt = createdAt;
     // this.id = id;

@@ -1,12 +1,14 @@
 import { Router } from "express";
-import { crearFeria, cantidadFeria, obtenerFerias, obtenerFeriaPorId } from "./feriaController";
+import * as feriaController from "./feriaController";
 
 const router = Router();
 
-router.get("/", obtenerFerias);
-router.get("/:id", obtenerFeriaPorId);
-router.post("/crear", crearFeria);
-router.post("/cantidad", cantidadFeria);
+router.get("/", feriaController.obtenerFerias);
+router.get("/proximas", feriaController.obtenerProximasFerias);
+router.post("/", feriaController.crearFeria);
+router.get("/:id", feriaController.obtenerFeriaPorId);
+router.post("/crear", feriaController.crearFeria);
+router.post("/cantidad", feriaController.cantidadFeria);
 
 export default router;
 
