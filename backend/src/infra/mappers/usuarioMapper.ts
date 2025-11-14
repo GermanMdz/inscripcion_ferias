@@ -3,8 +3,10 @@ import { UsuarioEntity } from '../entities/usuarioEntity';
 
 export class UsuarioMapper {
   static fromEntityToDomain(entity: UsuarioEntity): Usuario {
-    const usuario = new Usuario(entity.nombre, entity.email, entity.password);
+    const usuario = new Usuario(entity.nombre);
     usuario.id = entity.id;
+    usuario.email = entity.email;
+    usuario.password = entity.password;
     usuario.role = entity.role;
     usuario.telefono = entity.telefono;
     usuario.rubro = entity.rubro;

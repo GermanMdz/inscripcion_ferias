@@ -28,7 +28,7 @@ export async function obtenerFeriaPorId(idFeria: number) {
     return feriaMapper.fromEntityToDomain(found);
 }
 
-export async function obtenerFerias() {
+export async function obtenerFeriasRepo() {
     const r = repo();
     const ferias = await r.find();
     return ferias.map(feriaMapper.fromEntityToDomain);

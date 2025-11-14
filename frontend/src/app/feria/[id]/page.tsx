@@ -23,6 +23,9 @@ export default async function GetFeria( { params } : { params: Promise<{ id: str
       <h1 className="text-3xl font-bold mb-4">{feria.nombre}</h1>
       <p>Lugar: {feria.direccion}</p>
       <p>Fecha: {feria.fecha}</p>
+      <p>Hora Inicio: {feria.horaInicio}</p>
+      <p>Hora Fin: {feria.horaFin}</p>
+      <p>Cupo: {feria.cupo}</p>
     </main>
   );
 }

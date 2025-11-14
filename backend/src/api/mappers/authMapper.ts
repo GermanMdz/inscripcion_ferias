@@ -4,9 +4,12 @@ import { RegisterDto, AuthResponseDto } from '../auth/authDtos';
 export class AuthMapper {
   // DTO -> Domain (cuando llega del cliente)
   static fromRegisterDtoToDomain(dto: RegisterDto): Usuario {
-    const usuario = new Usuario(dto.nombre, dto.email, dto.password);
-    usuario.telefono = dto.telefono;
+    const usuario = new Usuario(dto.nombre);
+    usuario.email = dto.email;
+    usuario.password = dto.password;
     usuario.rubro = dto.rubro;
+    usuario.telefono = dto.telefono;
+    usuario.role = 'user';
     return usuario;
   }
 
@@ -21,6 +24,8 @@ export class AuthMapper {
       id: usuario.id!,
       nombre: usuario.nombre,
       email: usuario.email!,
+      rubro: usuario.rubro!,
+      telefono: usuario.telefono!,
       role: usuario.role!,
       token,
       refreshToken,

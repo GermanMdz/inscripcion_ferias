@@ -29,12 +29,37 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header>
-          <nav className="bg-gray-800 p-4 text-white">
-            <Link href="/" className="mr-4">Home</Link>
-            <Link href="/feria" className="mr-4">Ferias</Link>
-            <Link href="/about">About</Link>
+          <nav className="bg-gray-800 p-4 text-white flex justify-between items-center">
+            {/* Enlaces izquierda */}
+            <div>
+              <Link href="/" className="mr-4">
+                Home
+              </Link>
+              <Link href="/feria" className="mr-4">
+                Ferias
+              </Link>
+              <Link href="/about">About</Link>
+            </div>
+
+            {/* Botones derecha */}
+            <div>
+              <Link
+                href="/auth/login"
+                className="mr-4 border px-3 py-1 rounded hover:bg-gray-700"
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/auth/register"
+                className="border px-3 py-1 rounded hover:bg-gray-700"
+              >
+                Register
+              </Link>
+            </div>
           </nav>
         </header>
+
         {children}
       </body>
     </html>

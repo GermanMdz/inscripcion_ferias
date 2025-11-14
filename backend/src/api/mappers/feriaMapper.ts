@@ -18,7 +18,11 @@ export class feriaMapper {
             id: feria.id,
             nombre: feria.nombre,
             fecha: feria.fecha,
-            direccion: feria.direccion
+            direccion: feria.direccion,
+            horaInicio: feria.horaInicio,
+            horaFin: feria.horaFin,
+            cupo: feria.cupo,
+            createdAt: feria.createdAt,
         };
     }
 }

@@ -4,19 +4,31 @@ const API_URL = "http://localhost:4000";
 
 export const feriaService = {
   getAll: async () => {
-    const res = await fetch(`${API_URL}/feria`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/feria`,{
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
     if (!res.ok) throw new Error("Error al obtener las ferias");
     return res.json();
   },
 
   getUpcoming: async () => {
-    const res = await fetch(`${API_URL}/feria/proximas`);
-    if (!res.ok) throw new Error("Error al obtener las ferias");
+    const res = await fetch(`${API_URL}/feria/proximas`,{
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(`Error al obtener las ferias: ${errorData.error }`);
+    }
     return res.json();
   },
 
   getById: async (id: number) => {
-    const res = await fetch(`${API_URL}/feria/${id}`);
+    const res = await fetch(`${API_URL}/feria/${id}`,{
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
     if (!res.ok) throw new Error(`Error al obtener la feria ${id}`);
     return res.json();
   },

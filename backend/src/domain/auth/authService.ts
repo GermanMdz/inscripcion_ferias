@@ -1,4 +1,3 @@
-// import { crearUsuarioRepo } from "../../infra/repositories/usuarioRepository";
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { Usuario } from '../usuario/usuario';
@@ -6,7 +5,6 @@ import {
   crearUsuarioRepo,
   obtenerUsuarioPorEmailRepo,
   obtenerUsuarioPorIdRepo,
-  actualizarUsuarioRepo,
 } from '../../infra/repositories/usuarioRepository';
 import { TokenPayload } from '../../api/auth/authDtos';
 
@@ -32,16 +30,32 @@ export class AuthService {
 
   async login(email: string, password: string): Promise<{ usuario: Usuario; token: string; refreshToken: string }> {
     // Buscar usuario
+    console.log('🔍 Buscando usuario con email:', email);
     const usuario = await obtenerUsuarioPorEmailRepo(email);
+    
     if (!usuario) {
+      console.log('❌ Usuario no encontrado');
       throw new Error('Email o contraseña incorrectos');
     }
 
+    console.log('✅ Usuario encontrado:', usuario.email);
+    console.log('🔐 Password en BD existe:', !!usuario.password);
+    console.log('🔐 Password proporcionado existe:', !!password);
+
     // Verificar password
-    const passwordValida = await bcrypt.compare(password, usuario.password!);
-    if (!passwordValida) {
+    if (!usuario.password || !password) {
+      console.error('❌ Password faltante - BD:', !!usuario.password, '- Formulario:', !!password);
       throw new Error('Email o contraseña incorrectos');
     }
+
+    const passwordValida = await bcrypt.compare(password, usuario.password);
+    
+    if (!passwordValida) {
+      console.log('❌ Password incorrecto');
+      throw new Error('Email o contraseña incorrectos');
+    }
+
+    console.log('✅ Password correcto');
 
     // Generar tokens
     const token = this.generarToken(usuario);

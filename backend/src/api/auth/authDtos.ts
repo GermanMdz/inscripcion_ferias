@@ -16,6 +16,8 @@ export interface AuthResponseDto {
   nombre: string;
   email: string;
   role: 'admin' | 'user';
+  rubro?: string;
+  telefono?: string;
   token: string;
   refreshToken: string;
 }

@@ -1,4 +1,4 @@
-import { crearFeriaRepo, obtenerCantidadRepo, obtenerFerias, obtenerFeriaPorNombre, obtenerFeriaPorId } from "../../infra/repositories/feriaRepository";
+import { crearFeriaRepo, obtenerCantidadRepo, obtenerFeriasRepo, obtenerFeriaPorNombre, obtenerFeriaPorId } from "../../infra/repositories/feriaRepository";
 import { Feria } from "./feria";
 
 export class FeriaService {
@@ -12,7 +12,7 @@ export class FeriaService {
     }
 
     async obtenerFerias(): Promise<Feria[]> {
-        const ferias = await obtenerFerias();
+        const ferias = await obtenerFeriasRepo();
         if (!ferias || ferias.length === 0) {
             throw new Error("No hay ferias registradas");
         }

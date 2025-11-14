@@ -8,9 +8,7 @@ export class Usuario {
     telefono?: string | undefined;
     createdAt?: Date;
 
-    constructor(nombre: string, email: string, password: string) {
+    constructor(nombre: string) {
         this.nombre = nombre;
-        this.email = email;
-        this.password = password;
     }
 }
