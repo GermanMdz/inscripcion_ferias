@@ -14,6 +14,7 @@ export const authService = {
         }
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/;`;
+        document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
     },
 
@@ -29,13 +30,19 @@ export const authService = {
         }
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/;`;
+        document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
     },
 
-    refresh: async () => {
+    refresh: async (refreshToken: string | undefined) => {
+        if (!refreshToken) {
+            throw new Error("No hay refresh token disponible");
+        }
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
             method: "POST",
             // credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ refreshToken }),
         });
         if (!res.ok) {
             const errorData = await res.json();
@@ -43,6 +50,7 @@ export const authService = {
         }
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/;`;
+        document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
     }
 }
