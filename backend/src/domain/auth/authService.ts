@@ -63,6 +63,19 @@ export class AuthService {
     }
   }
 
+  async me(token: string): Promise<Usuario> {
+    try {
+      const payload = jwt.verify(token, JWT_SECRET) as TokenPayload;
+      const usuario = await obtenerUsuarioPorIdRepo(payload.userId);
+      if (!usuario) {
+        throw new Error('Usuario no encontrado');
+      }
+      return usuario;
+    } catch (error) {
+      throw new Error('Token inválido');
+    }
+  }
+  
   private generarToken(usuario: Usuario): string {
     const payload: TokenPayload = {
       userId: usuario.id!,

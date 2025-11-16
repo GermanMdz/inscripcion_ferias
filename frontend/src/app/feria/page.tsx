@@ -20,6 +20,8 @@ export default function Ferias() {
         // 2. REFRESH
         const userData = await authService.refresh(refreshToken);
         console.log("USER:", userData);
+        const userObj = await authService.me(userData.token);
+        console.log("USER ME:", userObj);
         setUser(userData);
 
         // 3. FERIAS

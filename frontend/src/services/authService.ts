@@ -52,5 +52,19 @@ export const authService = {
         document.cookie = `token=${data.token}; path=/;`;
         document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
+    },
+
+    me: async (token: string) => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token }),
+        });
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(`Error al obtener datos del usuario: ${errorData.error}`);
+        }
+        const data = await res.json();
+        return data;
     }
 }

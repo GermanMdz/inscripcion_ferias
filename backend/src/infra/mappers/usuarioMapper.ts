@@ -6,7 +6,7 @@ export class UsuarioMapper {
     const usuario = new Usuario(entity.nombre);
     usuario.id = entity.id;
     usuario.email = entity.email;
-    usuario.password = entity.password;
+    // usuario.password = entity.password;
     usuario.role = entity.role;
     usuario.telefono = entity.telefono;
     usuario.rubro = entity.rubro;
