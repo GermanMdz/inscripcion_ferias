@@ -26,7 +26,6 @@ export class AuthService {
   async login(email: string, password: string): Promise<{ usuario: Usuario; token: string; refreshToken: string }> {
     const usuario = await obtenerUsuarioPorEmailRepo(email);
     if (!usuario) {
-      console.log('Usuario no encontrado');
       throw new Error('Email o contraseña incorrectos');
     }
 
@@ -42,6 +41,7 @@ export class AuthService {
 
     const token = this.generarToken(usuario);
     const refreshToken = this.generarRefreshToken(usuario);
+    
 
     return { usuario, token, refreshToken };
   }
@@ -75,7 +75,7 @@ export class AuthService {
       throw new Error('Token inválido');
     }
   }
-  
+
   private generarToken(usuario: Usuario): string {
     const payload: TokenPayload = {
       userId: usuario.id!,

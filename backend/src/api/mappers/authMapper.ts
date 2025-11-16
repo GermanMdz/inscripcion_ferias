@@ -17,8 +17,7 @@ export class AuthMapper {
   // IMPORTANTE: NO incluir password en la respuesta
   static fromDomainToAuthResponseDto(
     usuario: Usuario,
-    token: string,
-    refreshToken: string
+    token: string
   ): AuthResponseDto {
     return {
       id: usuario.id!,
@@ -28,7 +27,6 @@ export class AuthMapper {
       telefono: usuario.telefono!,
       role: usuario.role!,
       token,
-      refreshToken,
     };
   }
 

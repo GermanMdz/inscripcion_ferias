@@ -14,11 +14,11 @@ export default function Ferias() {
     async function loadData() {
       try {
         // 1. LEER COOKIE DESDE CLIENTE
-        const refreshToken = getCookie("refreshToken");
-        console.log("REFRESH TOKEN:", refreshToken);
+        // const refreshToken = getCookie("refreshToken");
+        // console.log("REFRESH TOKEN:", refreshToken);
 
         // 2. REFRESH
-        const userData = await authService.refresh(refreshToken);
+        const userData = await authService.refresh();
         console.log("USER:", userData);
         const userObj = await authService.me(userData.token);
         console.log("USER ME:", userObj);

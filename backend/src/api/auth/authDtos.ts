@@ -19,7 +19,7 @@ export interface AuthResponseDto {
   rubro?: string;
   telefono?: string;
   token: string;
-  refreshToken: string;
+  // refreshToken: string;
 }
 
 export interface TokenPayload {
