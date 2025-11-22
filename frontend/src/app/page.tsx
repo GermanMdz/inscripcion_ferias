@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { feriaService } from "@/services/api";
+import { feriaService } from "@/services/feriaServices";
 
 export default function HomePage() {
   const [formData, setFormData] = useState({

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Feria } from "@/types/feria";
-import { feriaService } from "@/services/api";
+import { feriaService } from "@/services/feriaServices";
 import FeriaCard from "@/components/FeriaCard";
 import { authService } from "@/services/authService";
 
@@ -45,12 +45,4 @@ export default function Ferias() {
       </div>
     </main>
   );
-}
-
-/* ---- Helper para leer cookie desde el CLIENTE ---- */
-function getCookie(name: string): string | undefined {
-  const match = document.cookie.match(
-    new RegExp("(^| )" + name + "=([^;]+)")
-  );
-  return match ? match[2] : undefined;
 }

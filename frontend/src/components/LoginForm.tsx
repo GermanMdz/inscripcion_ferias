@@ -1,40 +1,43 @@
 "use client";
 
+import { authService } from "@/services/authService";
+import { LoginDto, RegisterDto } from "@/types/RegisterDto";
 import { useState } from "react";
 
-export default function LoginForm({
-  onSubmit,
-}: {
-  onSubmit?: (form: { email: string; password: string }) => void;
-}) {
-  const [form, setForm] = useState({ email: "", password: "" });
+export default function LoginForm() {
+  const [error, setError] = useState("");
+  
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+    const newUser: LoginDto = {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+    };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // evita redirección SIEMPRE
-
-    if (onSubmit) {
-      onSubmit(form); // devuelve email y password al padre
+    try {
+      const res = await authService.login(newUser.email,newUser.password);
+      // window.location.href = "/feria";
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Error desconocido";
+      setError(message);
     }
-  };
+
+    // window.location.href = "/feria";
+  }
 
   return (
     <div className="border p-4 rounded shadow max-w-sm mx-auto">
       <h2 className="text-xl font-bold mb-3">Login</h2>
-
-      <form onSubmit={handleFormSubmit} className="flex flex-col gap-3">
+      {error && <p className="text-red-500">{error}</p>}
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
           type="email"
           name="email"
           placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
+          // value={form.email}
+          // onChange={handleChange}
           className="border p-2 rounded"
         />
 
@@ -42,8 +45,8 @@ export default function LoginForm({
           type="password"
           name="password"
           placeholder="Contraseña"
-          value={form.password}
-          onChange={handleChange}
+          // value={form.password}
+          // onChange={handleChange}
           className="border p-2 rounded"
         />
 

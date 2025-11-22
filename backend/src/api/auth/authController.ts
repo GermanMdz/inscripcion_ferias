@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response) => {
             secure: false,
             sameSite: "lax",
             path: "/",
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 días
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
         return res.status(201).json(response);
     } catch (e: any) {
@@ -49,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
             secure: false,
             sameSite: "lax",
             path: "/",
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 días
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
         return res.status(200).json(response);
     } catch (e: any) {
@@ -72,7 +72,7 @@ export const refresh = async (req: Request, res: Response) => {
             secure: false,
             sameSite: "lax",
             path: "/",
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 días
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
         return res.status(200).json({ token });
     } catch (e: any) {
@@ -80,9 +80,6 @@ export const refresh = async (req: Request, res: Response) => {
     }
 };
 
-// /auth/me
-// hacerlo mejor, con separacion de responsabilidades
-// el token viaja en el header Authorization: Bearer <token>. Aun no esta implementado asi en el frontend
 export const me = async (req: Request, res: Response) => {
   try {
     const { token } = req.body;
