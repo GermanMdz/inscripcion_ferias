@@ -82,14 +82,21 @@ export const refresh = async (req: Request, res: Response) => {
 
 export const me = async (req: Request, res: Response) => {
   try {
-    const { token } = req.body;
-    if (!token) {
-        return res.status(400).json({ error: 'refreshToken es requerido' });
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ error: "Token no proporcionado" });
     }
-    const usuario = await authService.me(token);
-    const responce = authMapper.fromDomainToAuthResponseDto(usuario,token)
-    return res.json(responce);
+
+    const token = authHeader.split(" ")[1];
+
+    const usuario = await authService.me(token!);
+
+    const response = authMapper.fromDomainToAuthResponseDto(usuario, token!);
+
+    return res.json(response);
+
   } catch (e: any) {
-    return res.status(401).json({ message:  e.message });
+    return res.status(401).json({ message: e.message });
   }
 };

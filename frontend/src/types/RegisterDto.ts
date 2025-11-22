@@ -16,3 +16,11 @@ export interface TokenPayload {
   email: string;
   role: string;
 }
+
+export interface Usuario{
+  id: number;
+  nombre: string;
+  email: string;
+  rubro?: string;
+  telefono?: string;
+}

@@ -44,15 +44,28 @@ export const obtenerFeriaPorId = async (req: Request, res: Response) => {
     }
 };
 
-
 export const inscribirUsuarioAFeria = async (req: Request, res: Response) => {
     try {
-        // const inscripcion = await feriaService.inscribirUsuarioAFeria(idUsuario, idFeria);
-        // return res.status(201).json(inscripcion);
+        const usuarioId = req.body.usuarioId
+        const feriaId = req.body.feriaId;
+        const inscripcion = await feriaService.inscribirUsuarioAFeria(usuarioId, feriaId);
+        return res.status(201).json(inscripcion);
     } catch (e: any) {
         return res.status(400).json({ error: e.message });
     }
 }
+
+// export const obtenerInscripcion = async (req: Request, res: Response) => {
+//     try { 
+//         const usuarioId = req.body.usuarioId
+//         const feriaId = req.body.feriaId;
+//         const inscripcion = await feriaService.obtenerInscripcion(usuarioId, feriaId);
+//         return res.status(201).json(inscripcion);
+//     }
+//     catch (e: any) { 
+//         return res.status(400).json({ error: e.message });
+//     }
+// }
 
 
 // no tiene utilidad, solo para ver funcionamiento

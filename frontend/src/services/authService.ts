@@ -1,4 +1,5 @@
 import { RegisterDto } from "@/types/RegisterDto";
+// import { cookies } from "next/headers";
 // import { authFetch } from "./authFetch";
 
 export const authService = {
@@ -14,7 +15,7 @@ export const authService = {
           throw new Error(`Error al iniciar sesión: ${errorData.error}`);
         }
         const data = await res.json();
-        // document.cookie = `token=${data.token}; path=/;`;
+        document.cookie = `token=${data.token}; path=/;`;
         // document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
     },
@@ -31,7 +32,7 @@ export const authService = {
             throw new Error(`Error al iniciar sesión: ${errorData.error}`);
         }
         const data = await res.json();
-        // document.cookie = `token=${data.token}; path=/;`;
+        document.cookie = `token=${data.token}; path=/;`;
         // document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
     },
@@ -46,12 +47,17 @@ export const authService = {
             throw new Error(`Error al refrescar token: ${errorData.error}`);
         }
         const data = await res.json();
-        // document.cookie = `token=${data.token}; path=/;`;
+        document.cookie = `token=${data.token}; path=/;`;
         // document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
     },
 
-    me: async (token: string) => {
+    me: async () => {
+        const token = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("token="))
+        ?.split("=")[1];
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
             method: "POST",
             headers: { 
@@ -59,7 +65,7 @@ export const authService = {
                 "Authorization": `Bearer ${token}`
             },
             credentials: "include",
-            body: JSON.stringify({ token }),
+            // body: JSON.stringify({ token }),
         });
         if (!res.ok) {
             const errorData = await res.json();
