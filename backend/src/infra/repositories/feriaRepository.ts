@@ -40,4 +40,8 @@ export async function obtenerCantidadRepo() {
     return { cantidad };
 }
 
+export async function obtenerInscripcionesRepo(feriaId: number) {
+    throw new Error("Esta funcionalidad ha sido movida a InscripcionRepository");
+}
+
 export default repo;

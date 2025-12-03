@@ -15,6 +15,7 @@ export class Usuario {
 }
 
 export interface DatosUsuarioIncripcion{
+    id: number;
     nombre: string;
     email: string;
     rubro: string;

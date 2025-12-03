@@ -1,8 +1,6 @@
 import { crearFeriaRepo, obtenerCantidadRepo, obtenerFeriasRepo, obtenerFeriaPorNombre, obtenerFeriaPorId } from "../../infra/repositories/feriaRepository";
-import { obtenerUsuarioPorIdRepo } from "../../infra/repositories/usuarioRepository"
-import { obtenerInscripcionRepo, crearInscripcionRepo } from "../../infra/repositories/inscripcionRepository"
+import { obtenerUsuarioPorIdRepo } from "../../infra/repositories/usuarioRepository";
 import { Feria } from "./feria";
-import { Inscripcion } from "../inscripcion/Inscripcion";
 
 export class FeriaService {
     
@@ -43,27 +41,11 @@ export class FeriaService {
         return feria;
     }    
 
-    async inscribirUsuarioAFeria(usuarioId: number, feriaId: number) {
-        const usuario = await obtenerUsuarioPorIdRepo(usuarioId);
+    async obtenerInscripciones(feriaId: number) {
         const feria = await obtenerFeriaPorId(feriaId);
-
-        if (!usuario || !feria) throw new Error("Usuario o Feria no existe");
-        const inscripcion = new Inscripcion(usuario.id!,feria.id!);
-
-        const existente = await obtenerInscripcionRepo(inscripcion);
-        if (existente) {
-            throw new Error("La inscripcion ya existe");
-        }
-        return await crearInscripcionRepo(inscripcion);
+        if (!feria) throw new Error("La feria no existe");
+        throw new Error("Esta funcionalidad ha sido movida a InscripcionService");
     }
-
-    // async obtenerInscripcion(usuarioId: number, feriaId: number) {
-    //     const usuario = await obtenerUsuarioPorIdRepo(usuarioId);
-    //     const feria = await obtenerFeriaPorId(feriaId);
-    //     if (!usuario || !feria) throw new Error("Usuario o Feria no existe");
-    //     const inscripcion = new Inscripcion(usuario.id!,feria.id!);
-    //     return await obtenerInscripcionRepo(inscripcion);
-    // }
 
     async obtenerCantidad(): Promise<{ cantidad: number }> {
         const cantidad = await obtenerCantidadRepo();

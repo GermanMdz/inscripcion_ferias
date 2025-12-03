@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useFeria } from "@/kilombo/useFeria";
-import { inscripcionService } from "@/kilombo/inscripcionService";
+import { inscripcionService } from "@/services/inscripcionService";
 import { useAuth } from "@/kilombo/authContext";
 
 export default function FeriaDetailsClient({ feriaId }: { feriaId: number }) {

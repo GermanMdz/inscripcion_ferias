@@ -1,4 +1,4 @@
-import { Usuario } from '../../domain/usuario/usuario';
+import { DatosUsuarioIncripcion, Usuario } from '../../domain/usuario/usuario';
 import { UsuarioEntity } from '../entities/usuarioEntity';
 
 export class UsuarioMapper {
@@ -23,5 +23,18 @@ export class UsuarioMapper {
       telefono: usuario.telefono!,
       rubro: usuario.rubro!,
     };
+  }
+
+  static fromEntitieToDatosUsuarioInscripcion(entity: UsuarioEntity, fecha:Date) {
+    const usuario: DatosUsuarioIncripcion = {
+      id: entity.id,
+      nombre: entity.nombre,
+      email: entity.email!,
+      rubro: entity.rubro!,
+      telefono: entity.telefono!,
+      ultimaInscripcion: entity.ultimaInscripcion!,
+      createdAt: fecha,
+    };
+    return usuario;
   }
 }

@@ -23,6 +23,9 @@ export class UsuarioEntity {
   @Column({ nullable: true })
   telefono!: string;
 
+  @Column({ nullable: true, default: 'pendiente' })
+  ultimaInscripcion!: string;
+
   @CreateDateColumn({ type: "timestamptz" })
   createdAt!: Date;
 }

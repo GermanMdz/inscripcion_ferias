@@ -1,0 +1,43 @@
+import { obtenerUsuarioPorIdRepo } from "../../infra/repositories/usuarioRepository";
+import { obtenerInscripcionRepo, crearInscripcionRepo, obtenerInscripcionesRepo } from "../../infra/repositories/inscripcionRepository";
+import { obtenerFeriaPorId as obtenerFeriaPorIdRepo } from "../../infra/repositories/feriaRepository";
+import { Inscripcion } from "./Inscripcion";
+import { OrdenLlegada } from "./OrdenLlegada";
+
+export class InscripcionService {
+    async inscribirUsuarioAFeria(usuarioId: number, feriaId: number) {
+        const usuario = await obtenerUsuarioPorIdRepo(usuarioId);
+        const feria = await obtenerFeriaPorIdRepo(feriaId);
+
+        if (!usuario || !feria) throw new Error("Usuario o Feria no existe");
+        const inscripcion = new Inscripcion(usuario.id!, feria.id!);
+
+        const existente = await obtenerInscripcionRepo(inscripcion);
+        if (existente) {
+            throw new Error("La inscripcion ya existe");
+        }
+        return await crearInscripcionRepo(inscripcion);
+    }
+
+    async obtenerInscripciones(feriaId: number) {
+        return await obtenerInscripcionesRepo(feriaId);
+    }
+
+    async obtenerListadoPorLlegada(feriaId: number) {
+        const feria = await obtenerFeriaPorIdRepo(feriaId);
+        if (!feria) throw new Error("Feria no existe");
+        const usuarios = await obtenerInscripcionesRepo(feriaId);
+        const criterio = new OrdenLlegada();
+        return criterio.generarListados(usuarios, feria.cupo!);
+    }
+
+    async obtenerListadoPorPrioridad(feriaId: number) {
+        const feria = await obtenerFeriaPorIdRepo(feriaId);
+        if (!feria) throw new Error("Feria no existe");
+        const usuarios = await obtenerInscripcionesRepo(feriaId);
+        // const criterio = new OrdenPrioridad();
+        // return criterio.generarListados(usuarios, feria.cupo!);
+    }
+}
+
+export const inscripcionService = new InscripcionService();

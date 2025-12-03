@@ -1,6 +1,7 @@
 import { type Request, type Response } from "express";
 import { feriaService } from "../../domain/feria/feriaService";
 import { feriaMapper } from "../mappers/feriaMapper";
+import { inscripcionService } from "../../domain/inscripcion/inscripcionService";
 
 export const crearFeria = async (req: Request, res: Response) => {
     try {
@@ -36,7 +37,7 @@ export const obtenerProximasFerias = async (req: Request, res: Response) => {
 export const obtenerFeriaPorId = async (req: Request, res: Response) => {
     try {
         const id = parseInt(req.params.id!);
-        const feria = await feriaService.obtenerFeriaPorId(id); // ahora es array
+        const feria = await feriaService.obtenerFeriaPorId(id);
         const feriaDto = feriaMapper.fromDomainToDto(feria);
         return res.status(200).json(feriaDto); // 200 OK
     } catch (e: any) {
@@ -48,12 +49,43 @@ export const inscribirUsuarioAFeria = async (req: Request, res: Response) => {
     try {
         const usuarioId = req.body.usuarioId
         const feriaId = req.body.feriaId;
-        const inscripcion = await feriaService.inscribirUsuarioAFeria(usuarioId, feriaId);
+        const inscripcion = await inscripcionService.inscribirUsuarioAFeria(usuarioId, feriaId);
         return res.status(201).json(inscripcion);
     } catch (e: any) {
         return res.status(400).json({ error: e.message });
     }
-}
+};
+
+export const obtenerInscripciones = async (req: Request, res: Response) => {
+    try {
+        const id = parseInt(req.params.id!);
+        const usuarios = await inscripcionService.obtenerInscripciones(id);
+        return res.status(200).json(usuarios);
+    } catch (e: any) {
+        return res.status(400).json({ error: e.message });
+    }
+};
+
+export const obtenerListadoPorLlegada = async (req: Request, res: Response) => {
+    try {
+        const id = parseInt(req.params.id!);
+        const usuarios = await inscripcionService.obtenerListadoPorLlegada(id);
+        return res.status(200).json(usuarios);
+    } catch (e: any) {
+        return res.status(400).json({ error: e.message });
+    }
+};
+
+export const obtenerListadoPorPrioridad = async (req: Request, res: Response) => {
+    // TODO: implementar orden por prioridad en dominio
+    // try {
+    //     const id = parseInt(req.params.id!);
+    //     const usuarios = await inscripcionService.obtenerListadoPorPrioridad(id);
+    //     return res.status(200).json(usuarios);
+    // } catch (e: any) {
+    //     return res.status(400).json({ error: e.message });
+    // }
+};
 
 // export const obtenerInscripcion = async (req: Request, res: Response) => {
 //     try { 

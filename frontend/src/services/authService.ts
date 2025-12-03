@@ -1,6 +1,4 @@
 import { RegisterDto } from "@/types/RegisterDto";
-// import { cookies } from "next/headers";
-// import { authFetch } from "./authFetch";
 
 export const authService = {
     login: async (email: string, password: string) => {

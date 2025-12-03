@@ -1,10 +1,10 @@
 import { Feria } from "@/types/feria";
 
-const API_URL = "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const feriaService = {
   getAll: async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/feria`, {
+    const res = await fetch(`${API_URL}/feria`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -35,9 +35,13 @@ export const feriaService = {
   },
 
   create: async (feria: Feria) => {
+    const token = obtenerToken();
     const res = await fetch(`${API_URL}/feria`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${token}` 
+      },
       body: JSON.stringify(feria),
     });
     if (!res.ok) {
@@ -65,33 +69,45 @@ export const feriaService = {
     return res.json();
   },
 
-  subscribe: async (usuarioId: number, feriaId: number) => {
-    const token = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("token="))
-        ?.split("=")[1];
-        
-    const res = await fetch(`${API_URL}/feria/inscribir`, {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify({ usuarioId, feriaId }),
-    });
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(`Error al inscribirse la feria: ${errorData.error}`);
-    }
-    return res.json();
-  },
+  // subscribe: async (usuarioId: number, feriaId: number) => {
+  //   const token = document.cookie
+  //       .split("; ")
+  //       .find((row) => row.startsWith("token="))
+  //       ?.split("=")[1];
+
+  //   const res = await fetch(`${API_URL}/feria/inscribir`, {
+  //     method: "POST",
+  //     headers: { 
+  //       "Content-Type": "application/json",
+  //       "Authorization": `Bearer ${token}`
+  //     },
+  //     body: JSON.stringify({ usuarioId, feriaId }),
+  //   });
+  //   if (!res.ok) {
+  //     const errorData = await res.json();
+  //     throw new Error(`Error al inscribirse a la feria: ${errorData.error}`);
+  //   }
+  //   return res.json();
+  // },
+
+  // getSubscriptions: async (id: number) => {
+  //   const res = await fetch(`${API_URL}/feria/${id}/inscripciones`, {
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+  //   if (!res.ok) {
+  //     const errorData = await res.json();
+  //     throw new Error(`Error al obtener las inscripciones de la feria: ${errorData.error}`);
+  //   }
+  //   return res.json();
+  // },
 
   // checkSubscription:async (usuarioId: number, feriaId: number) => {
   //   const token = document.cookie
   //       .split("; ")
   //       .find((row) => row.startsWith("token="))
   //       ?.split("=")[1];
-        
+
   //   const res = await fetch(`${API_URL}/feria/ver/inscripcion`, {
   //     method: "GET",
   //     headers: { 
@@ -107,3 +123,10 @@ export const feriaService = {
   //   return res.json();
   // },
 };
+function obtenerToken() {
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("token="))
+    ?.split("=")[1];
+}
+

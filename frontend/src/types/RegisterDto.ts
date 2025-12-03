@@ -24,3 +24,13 @@ export interface Usuario{
   rubro?: string;
   telefono?: string;
 }
+
+export interface DatosUsuarioIncripcion{
+    id: number;
+    nombre: string;
+    email: string;
+    rubro: string;
+    telefono: string;
+    ultimaInscripcion: string;
+    createdAt: Date;
+}
