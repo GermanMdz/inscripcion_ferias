@@ -47,7 +47,7 @@ export const login = async (req: Request, res: Response) => {
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: false,
-            sameSite: "lax",
+            sameSite: "strict",
             path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
@@ -56,6 +56,16 @@ export const login = async (req: Request, res: Response) => {
         return res.status(401).json({ error: e.message });
     }
 };
+
+export const logout = async (req: Request, res: Response) => {
+    res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "strict",
+    path: "/",
+  });
+  return res.status(200).json({ message: "Logged out" });
+}
 
 
 export const refresh = async (req: Request, res: Response) => {
@@ -70,7 +80,7 @@ export const refresh = async (req: Request, res: Response) => {
         res.cookie("refreshToken", nuevoRefreshToken, {
             httpOnly: true,
             secure: false,
-            sameSite: "lax",
+            sameSite: "strict",
             path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });

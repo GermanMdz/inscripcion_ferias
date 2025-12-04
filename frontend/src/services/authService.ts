@@ -14,7 +14,20 @@ export const authService = {
         }
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/;`;
-        // document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
+        return data;
+    },
+
+    logout: async () => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+            method: "POST",
+            credentials: "include",
+        });
+        const data = await res.json();
+        if (!res.ok) {
+            throw new Error(`Error al cerrar sesión: ${data.error}`);
+        }
+        // const data = await res.json();
+        document.cookie = "token=; Max-Age=0; path=/";
         return data;
     },
 
@@ -31,7 +44,6 @@ export const authService = {
         }
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/;`;
-        // document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
     },
 
@@ -46,7 +58,6 @@ export const authService = {
         }
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/;`;
-        // document.cookie = `refreshToken=${data.refreshToken}; path=/;`;
         return data;
     },
 
@@ -63,7 +74,6 @@ export const authService = {
                 "Authorization": `Bearer ${token}`
             },
             credentials: "include",
-            // body: JSON.stringify({ token }),
         });
         if (!res.ok) {
             const errorData = await res.json();
