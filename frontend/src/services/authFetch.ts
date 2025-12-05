@@ -31,6 +31,7 @@ async function refreshAccessToken(refreshToken: string) {
   const res = await fetch(`${API_URL}/auth/refresh`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify({ refreshToken }),
   });
 
@@ -75,6 +76,7 @@ export async function authFetch(url: string, options: RequestInit = {}) {
       ...(options.headers as Record<string, string>),
       ...authHeaders,
     },
+    credentials: "include",
   });
 
   if (res.status === 401 && refreshToken) {
@@ -88,6 +90,7 @@ export async function authFetch(url: string, options: RequestInit = {}) {
         ...(options.headers as Record<string, string>),
         Authorization: `Bearer ${token}`,
       },
+      credentials: "include",
     });
   }
 

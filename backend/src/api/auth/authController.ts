@@ -23,8 +23,8 @@ export const register = async (req: Request, res: Response) => {
         const response = authMapper.fromDomainToAuthResponseDto(usuarioCreado, token);
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
             path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
@@ -46,8 +46,8 @@ export const login = async (req: Request, res: Response) => {
         const response = authMapper.fromDomainToAuthResponseDto(usuario, token);
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: "strict",
+            secure: true,
+            sameSite: "none",
             path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
@@ -60,8 +60,8 @@ export const login = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
     res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: false,
-    sameSite: "strict",
+    secure: true,
+    sameSite: "none",
     path: "/",
   });
   return res.status(200).json({ message: "Logged out" });
@@ -79,8 +79,8 @@ export const refresh = async (req: Request, res: Response) => {
         const { token, refreshToken: nuevoRefreshToken } = await authService.refreshToken(refreshToken);
         res.cookie("refreshToken", nuevoRefreshToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: "strict",
+            secure: true,
+            sameSite: "none",
             path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });

@@ -11,7 +11,10 @@ const app = express();
 
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: [
+    "http://localhost:3000",
+    "https://inscripcion-ferias-5vsz7xcf4-germanmdzs-projects.vercel.app"
+  ],
   credentials: true,
 }));
 

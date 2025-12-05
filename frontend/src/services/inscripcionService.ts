@@ -9,6 +9,7 @@ export const inscripcionService = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
+      credentials: "include",
       body: JSON.stringify({ usuarioId, feriaId }),
     });
     if (!res.ok) {
@@ -26,6 +27,7 @@ export const inscripcionService = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
+      credentials: "include",
     });
     if (!res.ok) {
       const errorData = await res.json();
@@ -42,6 +44,7 @@ export const inscripcionService = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
+      credentials: "include",
     });
     if (!res.ok) {
       const errorData = await res.json();

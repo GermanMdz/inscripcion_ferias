@@ -7,6 +7,7 @@ export const feriaService = {
     const res = await fetch(`${API_URL}/feria`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+      credentials: "include"
     });
     if (!res.ok) throw new Error("Error al obtener las ferias");
     return res.json();
@@ -29,6 +30,7 @@ export const feriaService = {
     const res = await fetch(`${API_URL}/feria/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+      credentials: "include"
     });
     if (!res.ok) throw new Error(`Error al obtener la feria ${id}`);
     return res.json();
@@ -43,6 +45,7 @@ export const feriaService = {
         "Authorization": `Bearer ${token}` 
       },
       body: JSON.stringify(feria),
+      credentials: "include"
     });
     if (!res.ok) {
       const errorData = await res.json();
@@ -56,6 +59,7 @@ export const feriaService = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(feria),
+      credentials: "include"
     });
     if (!res.ok) throw new Error(`Error al actualizar la feria ${id}`);
     return res.json();
@@ -64,6 +68,7 @@ export const feriaService = {
   delete: async (id: number) => {
     const res = await fetch(`${API_URL}/feria/${id}`, {
       method: "DELETE",
+      credentials: "include"
     });
     if (!res.ok) throw new Error(`Error al eliminar la feria ${id}`);
     return res.json();
