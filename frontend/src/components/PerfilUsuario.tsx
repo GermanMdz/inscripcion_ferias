@@ -27,23 +27,25 @@ export default function PerfilUsuario() {
   if (!user) return <p>Cargando...</p>;
 
   return (
-    <main className="max-w-xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Mi Perfil</h1>
+  <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 className="text-4xl font-bold text-purple-700 mb-8">Mi Perfil</h1>
 
-      <div className="border rounded p-4">
-        <p>
-          <strong>Nombre:</strong> {user.nombre}
+    <div className="bg-white rounded-lg shadow-lg p-10">
+      <div className="space-y-5 text-gray-700">
+        <p className="text-lg">
+          <span className="font-semibold text-gray-900">Nombre:</span> {user.nombre}
         </p>
-        <p>
-          <strong>Email:</strong> {user.email}
+        <p className="text-lg">
+          <span className="font-semibold text-gray-900">Email:</span> {user.email}
         </p>
-        <p>
-          <strong>Teléfono:</strong> {user.telefono}
+        <p className="text-lg">
+          <span className="font-semibold text-gray-900">Teléfono:</span> {user.telefono}
         </p>
-        <p>
-          <strong>Rubro:</strong> {user.rubro}
+        <p className="text-lg">
+          <span className="font-semibold text-gray-900">Rubro:</span> {user.rubro}
         </p>
       </div>
-    </main>
-  );
+    </div>
+  </main>
+);
 }

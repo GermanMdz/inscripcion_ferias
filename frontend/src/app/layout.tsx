@@ -27,55 +27,57 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${geistSans.variable} ${geistMono.variable} bg-white`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} bg-white m-0 p-0 w-full`}
+      >
         {/* NAVBAR */}
         <header className="sticky top-0 z-50 bg-white border-b-2 border-gray-200 shadow-sm">
           <nav className="px-4 sm:px-6 lg:px-8 py-5 flex items-center">
-  {/* Logo izquierda */}
-  <div className="flex-1">
-    <Link href="/">
-      <Image
-        src="/logo-mvl.png"
-        alt="Vivamos Vicente López"
-        width={150}
-        height={50}
-        className="h-auto"
-      />
-    </Link>
-  </div>
+            {/* Logo izquierda */}
+            <div className="flex-1">
+              <Link href="/">
+                <Image
+                  src="/logo-mvl.png"
+                  alt="Vivamos Vicente López"
+                  width={150}
+                  height={50}
+                  className="h-auto"
+                />
+              </Link>
+            </div>
 
-  {/* Menú en el centro */}
-  <ul className="flex-1 flex gap-8 items-center justify-center">
-    <li>
-      <Link
-        href="/"
-        className="text-gray-400 hover:text-purple-700 font-semibold text-sm uppercase tracking-wide transition-colors duration-300"
-      >
-        Inicio
-      </Link>
-    </li>
-    <li>
-      <Link
-        href="/feria"
-        className="text-gray-400 hover:text-purple-700 font-semibold text-sm uppercase tracking-wide transition-colors duration-300"
-      >
-        Ferias
-      </Link>
-    </li>
-  </ul>
+            {/* Menú en el centro */}
+            <ul className="flex-1 flex gap-8 items-center justify-center">
+              <li>
+                <Link
+                  href="/"
+                  className="text-gray-400 hover:text-purple-700 font-semibold text-sm uppercase tracking-wide transition-colors duration-300"
+                >
+                  Inicio
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/feria"
+                  className="text-gray-400 hover:text-purple-700 font-semibold text-sm uppercase tracking-wide transition-colors duration-300"
+                >
+                  Ferias
+                </Link>
+              </li>
+            </ul>
 
-  {/* Botones derecha */}
-  <div className="flex-1 flex items-center justify-end gap-4">
-    <BotonesAuth />
-  </div>
-</nav>
+            {/* Botones derecha */}
+            <div className="flex-1 flex items-center justify-end gap-4">
+              <BotonesAuth />
+            </div>
+          </nav>
 
           {/* Barra multicolor */}
           <div className="h-1 bg-gradient-to-r from-pink-500 via-green-400 via-teal-500 to-blue-600"></div>
         </header>
 
         {/* MAIN */}
-        <main className="bg-white flex flex-col">{children}</main>
+        <main className="bg-white flex flex-col w-full">{children}</main>
 
         {/* FOOTER - Solo si NO está en /auth */}
         <PieDePagina />

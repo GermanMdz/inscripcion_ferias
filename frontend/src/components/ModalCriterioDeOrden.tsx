@@ -19,16 +19,18 @@ export default function ModalSeleccionCriterio({
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-xl p-6 w-80">
-        <h2 className="text-xl font-bold text-gray-800 mb-4">Seleccionar criterio</h2>
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full mx-4">
+        <h2 className="text-2xl font-bold text-purple-700 mb-6">
+          Seleccionar criterio
+        </h2>
 
-        <div className="space-y-3">
+        <div className="space-y-3 mb-8">
           <button
             onClick={() => setCriterio("llegada")}
-            className={`w-full px-4 py-2 rounded-lg border ${
+            className={`w-full px-4 py-3 rounded-lg border-2 font-semibold transition-all ${
               criterio === "llegada"
-                ? "bg-blue-600 text-white font-semibold"
-                : "bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium"
+                ? "bg-purple-700 text-white border-purple-700"
+                : "bg-white text-gray-900 border-gray-300 hover:border-purple-700"
             }`}
           >
             Orden de llegada
@@ -36,20 +38,20 @@ export default function ModalSeleccionCriterio({
 
           <button
             onClick={() => setCriterio("prioridad")}
-            className={`w-full px-4 py-2 rounded-lg border ${
+            className={`w-full px-4 py-3 rounded-lg border-2 font-semibold transition-all ${
               criterio === "prioridad"
-                ? "bg-blue-600 text-white font-semibold"
-                : "bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium"
+                ? "bg-purple-700 text-white border-purple-700"
+                : "bg-white text-gray-900 border-gray-300 hover:border-purple-700"
             }`}
           >
             Prioridades
           </button>
         </div>
 
-        <div className="flex justify-end mt-5 gap-3">
+        <div className="flex gap-3 justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 text-gray-900"
+            className="px-6 py-2 rounded-lg border border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
           >
             Cancelar
           </button>
@@ -57,10 +59,10 @@ export default function ModalSeleccionCriterio({
           <button
             disabled={!criterio}
             onClick={onConfirm}
-            className={`px-4 py-2 rounded-lg ${
+            className={`px-6 py-2 rounded-lg font-semibold transition-all ${
               criterio
-                ? "bg-blue-600 text-white hover:bg-blue-700 font-semibold"
-                : "bg-blue-300 text-white cursor-not-allowed"
+                ? "bg-purple-700 text-white hover:bg-purple-900 shadow-md"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
           >
             Confirmar

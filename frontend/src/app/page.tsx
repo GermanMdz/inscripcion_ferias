@@ -47,94 +47,108 @@ export default function HomePage() {
   };
 
   return (
-    <main className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Crear una feria :D</h1>
+  <main className="px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-4xl mx-auto">
+      <h1 className="text-4xl font-bold text-purple-700 mb-8">Crear una feria</h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded-2xl p-6 max-w-md mx-auto space-y-4"
-      >
+      <div className="bg-white rounded-lg shadow-lg p-12">
+        <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block mb-1 font-semibold">Nombre de feria</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Nombre de feria
+          </label>
           <input
             type="text"
             name="nombre"
             value={formData.nombre}
             onChange={handleChange}
-            className="w-full border rounded-lg p-2"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-700 focus:ring-2 focus:ring-purple-700 focus:ring-opacity-20 transition-all placeholder:text-gray-400 text-gray-900"
             required
           />
         </div>
 
         <div>
-          <label className="block mb-1 font-semibold">Fecha</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Fecha
+          </label>
           <input
             type="date"
             name="fecha"
             value={formData.fecha}
             onChange={handleChange}
-            placeholder="Ej: 10:00 - 18:00"
-            className="w-full border rounded-lg p-2"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-700 focus:ring-2 focus:ring-purple-700 focus:ring-opacity-20 transition-all text-gray-900"
             required
           />
         </div>
-         <div className="flex gap-4">
-          <div className="flex-1">
-            <label className="block mb-1 font-semibold">Hora inicio</label>
+
+        <div className="grid grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Hora inicio
+            </label>
             <input
               type="time"
               name="horaInicio"
               value={formData.horaInicio}
               onChange={handleChange}
-              className="w-full border rounded-lg p-2"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-700 focus:ring-2 focus:ring-purple-700 focus:ring-opacity-20 transition-all text-gray-900"
               required
             />
           </div>
 
-          <div className="flex-1">
-            <label className="block mb-1 font-semibold">Hora fin</label>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Hora fin
+            </label>
             <input
               type="time"
               name="horaFin"
               value={formData.horaFin}
               onChange={handleChange}
-              className="w-full border rounded-lg p-2"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-700 focus:ring-2 focus:ring-purple-700 focus:ring-opacity-20 transition-all text-gray-900"
               required
             />
           </div>
         </div>
+
         <div>
-          <label className="block mb-1 font-semibold">Dirección</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Dirección
+          </label>
           <input
             type="text"
             name="direccion"
             value={formData.direccion}
             onChange={handleChange}
-            className="w-full border rounded-lg p-2"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-700 focus:ring-2 focus:ring-purple-700 focus:ring-opacity-20 transition-all placeholder:text-gray-400 text-gray-900"
             required
           />
         </div>
 
         <div>
-          <label className="block mb-1 font-semibold">Cupo</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Cupo
+          </label>
           <input
             type="number"
             name="cupo"
             value={formData.cupo}
             onChange={handleChange}
             min="1"
-            className="w-full border rounded-lg p-2"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-700 focus:ring-2 focus:ring-purple-700 focus:ring-opacity-20 transition-all text-gray-900"
             required
           />
         </div>
 
         <button
           type="submit"
-          className="bg-blue-600 text-white rounded-lg py-2 px-4 hover:bg-blue-700 transition"
+          className="w-full bg-purple-700 text-white font-semibold py-3 rounded-lg hover:bg-purple-900 transition-all duration-300 shadow-md hover:shadow-lg mt-8"
         >
           Crear feria
         </button>
       </form>
-    </main>
-  );
+    </div>
+    </div>
+  </main>
+);
 }

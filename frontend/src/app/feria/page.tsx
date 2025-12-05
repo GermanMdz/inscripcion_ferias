@@ -13,18 +13,6 @@ export default function Ferias() {
   useEffect(() => {
     async function loadData() {
       try {
-        // 1. LEER COOKIE DESDE CLIENTE
-        // const refreshToken = getCookie("refreshToken");
-        // console.log("REFRESH TOKEN:", refreshToken);
-
-        // 2. REFRESH
-        const userData = await authService.refresh();
-        console.log("USER:", userData);
-        const userObj = await authService.me();
-        console.log("USER ME:", userObj);
-        setUser(userData);
-
-        // 3. FERIAS
         const data = await feriaService.getUpcoming();
         setFerias(data);
       } catch (e) {
@@ -36,13 +24,15 @@ export default function Ferias() {
   }, []);
 
   return (
-    <main className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Proximas ferias :D</h1>
-      <div className="grid gap-4">
-        {ferias.map((feria, index) => (
-          <FeriaCard key={index} feria={feria} />
-        ))}
-      </div>
-    </main>
+    <div className="px-4 sm:px-6 lg:px-8 py-12">
+  <h1 className="text-4xl font-bold text-purple-700 mb-10">
+    Próximas ferias
+  </h1>
+  <div className="grid gap-6">
+    {ferias.map((feria, index) => (
+      <FeriaCard key={index} feria={feria} />
+    ))}
+  </div>
+</div>
   );
 }

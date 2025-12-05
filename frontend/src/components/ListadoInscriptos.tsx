@@ -17,14 +17,15 @@ export default function ListadoInscriptos() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [criterio, setCriterio] = useState<"llegada" | "prioridad" | null>(null);
+  const [criterio, setCriterio] = useState<"llegada" | "prioridad" | null>(
+    null
+  );
   const [resultado, setResultado] = useState<{
     aprobados: DatosUsuarioIncripcion[];
     listaEspera: DatosUsuarioIncripcion[];
     rechazados: DatosUsuarioIncripcion[];
   } | null>(null);
-const [showResultado, setShowResultado] = useState(false);
-
+  const [showResultado, setShowResultado] = useState(false);
 
   async function generarListados() {
     setShowModal(true);
@@ -65,17 +66,19 @@ const [showResultado, setShowResultado] = useState(false);
 
   if (loading) {
     return (
-      <main className="container mx-auto p-8">
-        <h1 className="text-xl">Cargando Inscripciones...</h1>
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 className="text-3xl font-bold text-purple-700">
+          Cargando inscripciones...
+        </h1>
       </main>
     );
   }
 
   if (error) {
     return (
-      <main className="min-h-screen bg-gray-50 py-10">
-        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-md p-8">
-          <div className="p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="bg-white rounded-lg shadow-lg p-8">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded">
             {error}
           </div>
         </div>
@@ -84,7 +87,7 @@ const [showResultado, setShowResultado] = useState(false);
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 py-10">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <ModalCriterio
         open={showModal}
         criterio={criterio}
@@ -99,33 +102,34 @@ const [showResultado, setShowResultado] = useState(false);
         setResultado={setResultado}
       />
 
-
-      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-md p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">
-            Usuarios inscriptos en la feria{" "}
-            <span className="text-blue-600">{feria?.nombre}</span>
+      <div className="bg-white rounded-lg shadow-lg p-10">
+        <div className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <h1 className="text-4xl font-bold text-gray-900">
+            Usuarios inscriptos en{" "}
+            <span className="text-purple-700">{feria?.nombre}</span>
           </h1>
 
           <button
             onClick={generarListados}
-            className="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-900 transition-colors shadow-md hover:shadow-lg whitespace-nowrap w-full md:w-auto"
           >
             Generar listados
           </button>
         </div>
 
         {usuarios.length === 0 ? (
-          <p className="text-gray-600 italic">No hay inscripciones.</p>
+          <p className="text-gray-600 text-lg text-center py-8">
+            No hay inscripciones.
+          </p>
         ) : (
           <ul className="space-y-4">
             {usuarios.map((u) => (
               <li
                 key={u.id}
-                className="p-4 border rounded-xl bg-gray-100 flex items-center justify-between"
+                className="bg-gray-50 border border-gray-300 rounded-lg p-6 hover:shadow-md transition-shadow"
               >
                 <div>
-                  <p className="text-lg font-semibold text-gray-800">
+                  <p className="text-lg font-semibold text-gray-900">
                     {u.nombre}
                   </p>
                   <p className="text-gray-600">{u.email}</p>
@@ -135,6 +139,6 @@ const [showResultado, setShowResultado] = useState(false);
           </ul>
         )}
       </div>
-    </main>
+    </div>
   );
 }
