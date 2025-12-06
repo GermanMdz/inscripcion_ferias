@@ -16,7 +16,8 @@ export const feriaService = {
   getUpcoming: async () => {
     const res = await fetch(`${API_URL}/feria/proximas`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "69420" },
+      
       // credentials: "include"
     });
     if (!res.ok) {
@@ -74,59 +75,6 @@ export const feriaService = {
     return res.json();
   },
 
-  // subscribe: async (usuarioId: number, feriaId: number) => {
-  //   const token = document.cookie
-  //       .split("; ")
-  //       .find((row) => row.startsWith("token="))
-  //       ?.split("=")[1];
-
-  //   const res = await fetch(`${API_URL}/feria/inscribir`, {
-  //     method: "POST",
-  //     headers: { 
-  //       "Content-Type": "application/json",
-  //       "Authorization": `Bearer ${token}`
-  //     },
-  //     body: JSON.stringify({ usuarioId, feriaId }),
-  //   });
-  //   if (!res.ok) {
-  //     const errorData = await res.json();
-  //     throw new Error(`Error al inscribirse a la feria: ${errorData.error}`);
-  //   }
-  //   return res.json();
-  // },
-
-  // getSubscriptions: async (id: number) => {
-  //   const res = await fetch(`${API_URL}/feria/${id}/inscripciones`, {
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //   });
-  //   if (!res.ok) {
-  //     const errorData = await res.json();
-  //     throw new Error(`Error al obtener las inscripciones de la feria: ${errorData.error}`);
-  //   }
-  //   return res.json();
-  // },
-
-  // checkSubscription:async (usuarioId: number, feriaId: number) => {
-  //   const token = document.cookie
-  //       .split("; ")
-  //       .find((row) => row.startsWith("token="))
-  //       ?.split("=")[1];
-
-  //   const res = await fetch(`${API_URL}/feria/ver/inscripcion`, {
-  //     method: "GET",
-  //     headers: { 
-  //       "Content-Type": "application/json",
-  //       "Authorization": `Bearer ${token}`
-  //     },
-  //     body: JSON.stringify({ usuarioId, feriaId }),
-  //   });
-  //   if (!res.ok) {
-  //     const errorData = await res.json();
-  //     throw new Error(`Error al ver inscripcion a la feria: ${errorData.error}`);
-  //   }
-  //   return res.json();
-  // },
 };
 function obtenerToken() {
   return document.cookie

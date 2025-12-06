@@ -8,34 +8,39 @@ var cookieParser = require('cookie-parser');
 
 const app = express();
 
-
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://plumaged-cullen-unrash.ngrok-free.dev",
-      "https://inscripcion-ferias.vercel.app"
-    ],
-    credentials: true,
-  })
-);
-
-
-app.options("/feria/proximas", function (req, res) {
-  res.header("Access-Control-Allow-Origin", [
+// Configurar CORS correctamente
+const corsOptions = {
+  origin: [
     "http://localhost:3000",
     "https://plumaged-cullen-unrash.ngrok-free.dev",
     "https://inscripcion-ferias.vercel.app"
-  ]);
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-  res.send(204);
-});
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Content-Length", "X-Requested-With"]
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
+// LOG MIDDLEWARE - para debuguear
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  console.log(`Host: ${req.get('host')}`);
+  console.log(`Origin: ${req.get('origin')}`);
+  next();
+});
+
+// Las rutas después de los middlewares
 app.use("/feria", feriaRoutes);
 app.use("/usuario", usuarioRoutes);
 app.use("/auth", authRoutes);
+
+// Ruta catch-all para ver qué se está pidiendo que no existe
+app.use((req, res) => {
+  console.log(`404 - Ruta no encontrada: ${req.method} ${req.path}`);
+  res.status(404).json({ error: `Ruta no encontrada: ${req.method} ${req.path}` });
+});
 
 export default app;
