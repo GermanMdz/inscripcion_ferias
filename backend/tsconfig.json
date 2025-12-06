@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     /* Directorios */
-    "rootDir": "../backend",
-    "outDir": "./dist",
+    "rootDir": "src",
+    "outDir": "dist",
 
     /* Módulos y entorno */
     "module": "commonjs",
@@ -32,6 +32,6 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true
   },
-  "include": ["src", "test"],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["test","node_modules"]
 }
