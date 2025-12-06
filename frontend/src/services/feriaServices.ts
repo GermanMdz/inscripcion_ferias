@@ -24,8 +24,8 @@ export const feriaService = {
       const errorData = await res.json();
       throw new Error(`Error al obtener las ferias: ${errorData.error}`);
     }
-    const a= res.json();
-    console.log(a);
+    const a = res.json();
+    console.log(res);
     return a;
   },
 
