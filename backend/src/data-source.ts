@@ -9,11 +9,12 @@ dotenv.config();
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: process.env.DB_HOST || "localhost",
+  url: process.env.DB_URL || "url_not_set",
+  host: process.env.DB_HOST || "postgres.railway.internal",
   port: Number(process.env.DB_PORT) || 5432,
   username: process.env.DB_USER || "postgres",
   password: process.env.DB_PASS || "admin",
-  database: process.env.DB_NAME || "inscripcion_ferias",
+  database: process.env.DB_NAME || "railway",
   synchronize: true, // usar true solo en desarrollo
   logging: false,
   entities: [FeriaEntity, UsuarioEntity, InscripcionEntity],
