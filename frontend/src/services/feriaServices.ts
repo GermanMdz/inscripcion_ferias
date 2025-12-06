@@ -33,7 +33,7 @@ export const feriaService = {
   getById: async (id: number) => {
     const res = await fetch(`${API_URL}/feria/${id}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "69420" },
       credentials: "include"
     });
     if (!res.ok) throw new Error(`Error al obtener la feria ${id}`);
@@ -46,7 +46,8 @@ export const feriaService = {
       method: "POST",
       headers: { 
         "Content-Type": "application/json", 
-        "Authorization": `Bearer ${token}` 
+        "Authorization": `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "69420"
       },
       body: JSON.stringify(feria),
       credentials: "include"

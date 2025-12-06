@@ -7,7 +7,8 @@ export const inscripcionService = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "69420"
       },
       credentials: "include",
       body: JSON.stringify({ usuarioId, feriaId }),
@@ -25,7 +26,8 @@ export const inscripcionService = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "69420"
       },
       credentials: "include",
     });
@@ -42,7 +44,8 @@ export const inscripcionService = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "69420"
       },
       credentials: "include",
     });
