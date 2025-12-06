@@ -14,7 +14,7 @@ export const feriaService = {
   },
 
   getUpcoming: async () => {
-    const res = await fetch(`${API_URL}/feria/proximas`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/feria/proximas`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include"

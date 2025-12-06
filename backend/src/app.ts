@@ -9,27 +9,29 @@ var cookieParser = require('cookie-parser');
 const app = express();
 
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://plumaged-cullen-unrash.ngrok-free.dev",
-      "https://inscripcion-ferias.vercel.app"
-    ],
-    credentials: true,
-  })
-);
+// import cors from "cors";
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://plumaged-cullen-unrash.ngrok-free.dev",
+  "https://inscripcion-ferias.vercel.app"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // requests desde Postman o server-side
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 
 app.use(express.json());
 app.use(cookieParser());
-
-app.options("/", function (req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-  res.send(204);
-});
-
 app.use("/feria", feriaRoutes);
 app.use("/usuario", usuarioRoutes);
 app.use("/auth", authRoutes);
