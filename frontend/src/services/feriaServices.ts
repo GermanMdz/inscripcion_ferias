@@ -17,7 +17,7 @@ export const feriaService = {
     const res = await fetch(`${API_URL}/feria/proximas`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      credentials: "include"
+      // credentials: "include"
     });
     if (!res.ok) {
       const errorData = await res.json();
