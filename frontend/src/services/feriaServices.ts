@@ -24,7 +24,9 @@ export const feriaService = {
       const errorData = await res.json();
       throw new Error(`Error al obtener las ferias: ${errorData.error}`);
     }
-    return res.json();
+    const a= res.json();
+    console.log(a);
+    return a;
   },
 
   getById: async (id: number) => {
@@ -52,9 +54,7 @@ export const feriaService = {
       const errorData = await res.json();
       throw new Error(`Error al crear la feria: ${errorData.error}`);
     }
-    const a= res.json();
-    console.log(a);
-    return a;
+    return res.json();
   },
 
   update: async (id: number, feria: Feria) => {
