@@ -16,17 +16,14 @@ export const feriaService = {
   getUpcoming: async () => {
     const res = await fetch(`${API_URL}/feria/proximas`, {
       method: "GET",
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://inscripcion-ferias.vercel.app" },
-
+      headers: { "Content-Type": "application/json" },
       // credentials: "include"
     });
     if (!res.ok) {
       const errorData = await res.json();
       throw new Error(`Error al obtener las ferias: ${errorData.error}`);
     }
-    const a = res.json();
-    console.log(res);
-    return a;
+    return res.json();
   },
 
   getById: async (id: number) => {
