@@ -21,7 +21,7 @@ app.use(
 );
 
 
-app.options("/", function (req, res) {
+app.options("/feria/proximas", function (req, res) {
   res.header("Access-Control-Allow-Origin", [
     "http://localhost:3000",
     "https://plumaged-cullen-unrash.ngrok-free.dev",

@@ -28,7 +28,6 @@ export const obtenerProximasFerias = async (req: Request, res: Response) => {
     try {
         const ferias = await feriaService.obtenerProximasFerias();
         const feriasDto = ferias.map(feriaMapper.fromDomainToDto);
-        console.log("Origin request:", req.headers.origin);
         return res.status(200).json(feriasDto);
     } catch (e: any) {
         return res.status(400).json({ error: e.message });
