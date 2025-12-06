@@ -16,7 +16,7 @@ export const feriaService = {
   getUpcoming: async () => {
     const res = await fetch(`${API_URL}/feria/proximas`, {
       method: "GET",
-      headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "69420" },
+      headers: { "Content-Type": "application/json" },
       
       // credentials: "include"
     });
