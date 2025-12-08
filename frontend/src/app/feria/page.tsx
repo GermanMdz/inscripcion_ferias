@@ -24,15 +24,27 @@ export default function Ferias() {
   }, []);
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 py-12">
-  <h1 className="text-4xl font-bold text-purple-700 mb-10">
-    Próximas ferias
-  </h1>
-  <div className="grid gap-6">
-    {ferias.map((feria, index) => (
-      <FeriaCard key={index} feria={feria} />
-    ))}
-  </div>
-</div>
+    <div className="w-full">
+      {/* HERO */}
+      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-5xl font-bold mb-4">
+            Próximas ferias
+          </h1>
+          <p className="text-blue-100 text-xl max-w-2xl">
+            Explorá las ferias disponibles e inscribite para participar
+          </p>
+        </div>
+      </section>
+
+      {/* LISTADO */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-6xl mx-auto grid gap-6">
+          {ferias.map((feria) => (
+            <FeriaCard key={feria.id} feria={feria} />
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }

@@ -61,41 +61,84 @@ export default function GetFeria() {
   }
 
   return (
-  <div className="px-4 sm:px-6 lg:px-8 py-12">
-    <div className="max-w-4xl mx-auto">
-      <div className="bg-white rounded-lg shadow-lg p-12">
-        <h1 className="text-4xl font-bold text-purple-700 mb-8">{feria.nombre}</h1>
-        
-        <div className="space-y-5 mb-8 text-gray-700">
-          <p className="text-lg"><span className="font-semibold">📍 Lugar:</span> {feria.direccion}</p>
-          <p className="text-lg"><span className="font-semibold">📅 Fecha:</span> {feria.fecha}</p>
-          <p className="text-lg"><span className="font-semibold">🕐 Hora:</span> {feria.horaInicio} - {feria.horaFin}</p>
-          <p className="text-lg"><span className="font-semibold">👥 Cupo:</span> {feria.cupo}</p>
+  <div className="w-full">
+    {/* HERO */}
+    <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-5xl font-bold mb-4">{feria.nombre}</h1>
+        <p className="text-blue-100 text-xl">
+          📍 {feria.direccion}
+        </p>
+      </div>
+    </section>
+
+    {/* INFO */}
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="max-w-4xl mx-auto space-y-8">
+
+        {/* Detalles */}
+        <div className="bg-white rounded-xl shadow p-6 lg:p-8 
+                flex flex-col sm:flex-row sm:items-center sm:justify-around gap-6">
+
+          <div className="flex items-center gap-4">
+            <span className="text-2xl">📅</span>
+            <div>
+              <p className="text-sm text-gray-500">Fecha</p>
+              <p className="font-semibold text-gray-800">{feria.fecha}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="text-2xl">🕐</span>
+            <div>
+              <p className="text-sm text-gray-500">Horario</p>
+              <p className="font-semibold text-gray-800">
+                {feria.horaInicio} – {feria.horaFin}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="text-2xl">👥</span>
+            <div>
+              <p className="text-sm text-gray-500">Cupo disponible</p>
+              <p className="font-semibold text-gray-800">{feria.cupo}</p>
+            </div>
+          </div>
         </div>
 
+        {/* Error */}
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6 text-sm">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm">
             {error}
           </div>
         )}
 
-        <div className="flex gap-4">
-          <button
-            onClick={handleSubscribe}
-            className="px-6 py-3 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-900 transition-colors shadow-md hover:shadow-lg"
-          >
-            Inscribirse
-          </button>
+        {/* CTA */}
+        <div className="bg-white rounded-xl shadow p-8 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+          <p className="text-gray-700 text-lg">
+            ¿Querés participar de esta feria?
+          </p>
 
-          <Link
-            href={`/feria/${feria.id}/inscripciones`}
-            className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors shadow-md hover:shadow-lg"
-          >
-            Ver inscripciones
-          </Link>
+          <div className="flex gap-4">
+            <button
+              onClick={handleSubscribe}
+              className="px-8 py-3 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-900 transition-colors shadow-md"
+            >
+              Inscribirse
+            </button>
+
+            <Link
+              href={`/feria/${feria.id}/inscripciones`}
+              className="px-8 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors"
+            >
+              Ver inscripciones
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 );
+
 }

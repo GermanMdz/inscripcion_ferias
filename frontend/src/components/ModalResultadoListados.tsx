@@ -57,12 +57,12 @@ export default function ModalResultadoListados({ open, onClose, resultado, setRe
       key={usuario.id}
       className="bg-gray-50 border border-gray-300 rounded-lg p-4 flex justify-between items-center hover:shadow-md transition-shadow"
     >
-      <div className="flex-1">
+      <div className="flex-1 min-w-0">
         <p className="font-semibold text-gray-900">{usuario.nombre}</p>
-        <p className="text-gray-600 text-sm">{usuario.email}</p>
+        <p className="text-gray-600 text-sm truncate">{usuario.email}</p>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 ml-4 flex-shrink-0">
         {/* FLECHA ARRIBA */}
         {estado !== "aprobados" && (
           <button
@@ -106,48 +106,66 @@ async function guardarListados() {
 
   const { jsPDF } = await import("jspdf");
   const doc = new jsPDF();
+  const marginX = 10;
+  let y = 15;
 
-  let y = 10;
+  // Título principal
+  doc.setFontSize(20);
+  doc.setTextColor(0, 0, 0);
+  doc.setFont("helvetica", "bold");
+  doc.text("Listado de Inscripciones", marginX, y);
+  y += 12;
 
-  doc.setFontSize(18);
-  doc.text("Inscripciones", 10, y);
-  y += 10;
+  // Separador inicial
+  doc.setDrawColor(200); // gris claro
+  doc.setLineWidth(0.5);
+  doc.line(marginX, y, 195, y);
+  y += 12;
 
   function agregarSeccion(titulo: string, lista: DatosUsuarioIncripcion[]) {
-    doc.setFontSize(14);
-    doc.text(titulo, 10, y);
-    y += 8;
+  // Título de sección
+  doc.setFontSize(16);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(0, 0, 0); // <-- asegurar negro para el título
+  doc.text(`${titulo} (${lista.length})`, marginX, y);
+  y += 10;
 
-    doc.setFontSize(11);
-    if (lista.length === 0) {
-      doc.text("— Esta lista está vacía —", 12, y);
-      y += 6;
-    } else {
-      lista.forEach((u) => {
-        const nameX = 12;
-        const minEmailX = 100;
-        const spacing = 5;
+  // Lista de usuarios
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "normal");
+  if (lista.length === 0) {
+    doc.setTextColor(120); // gris medio para el mensaje de "vacío"
+    doc.text("— Esta lista está vacía —", marginX + 5, y);
+    y += 10;
+  } else {
+    lista.forEach(u => {
+      doc.setTextColor(0, 0, 0);
+      doc.text(u.nombre, marginX + 5, y);
+      doc.text(`tel: ${u.telefono} — ${u.email}`, marginX + 80, y);
+      y += 8;
 
-        const nameDimensions = doc.getTextDimensions(u.nombre);
-        const emailX = Math.max(
-          minEmailX,
-          nameX + nameDimensions.w + spacing
-        );
-
-        doc.text(u.nombre, nameX, y);
-        doc.text(`tel: ${u.telefono} — ${u.email}`, emailX, y);
-        y += 7;
-      });
-    }
-
-    y += 6;
+      if (y > 280) {
+        doc.addPage();
+        y = 15;
+      }
+    });
+    y += 5;
   }
 
-  agregarSeccion("Confirmados:", resultado.aprobados);
-  agregarSeccion("En lista de espera:", resultado.listaEspera);
-  agregarSeccion("Rechazados:", resultado.rechazados);
+  // Línea separadora
+  doc.setDrawColor(220);
+  doc.setLineWidth(0.3);
+  doc.line(marginX, y, 195, y);
+  y += 12;
+}
+
+
+  agregarSeccion("Confirmados", resultado.aprobados);
+  agregarSeccion("En lista de espera", resultado.listaEspera);
+  agregarSeccion("Rechazados", resultado.rechazados);
 
   doc.save("listados.pdf");
+
   const pdfBase64 = doc.output("datauristring");
   try {
     // await inscripcionService.guardarListados(id, pdfBase64);

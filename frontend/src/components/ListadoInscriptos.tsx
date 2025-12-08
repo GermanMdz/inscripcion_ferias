@@ -87,7 +87,7 @@ export default function ListadoInscriptos() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="w-full max-w-6xl mx-auto lg:p-12">
       <ModalCriterio
         open={showModal}
         criterio={criterio}
@@ -102,23 +102,41 @@ export default function ListadoInscriptos() {
         setResultado={setResultado}
       />
 
-      <div className="bg-white rounded-lg shadow-lg p-10">
-        <div className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <h1 className="text-4xl font-bold text-gray-900">
-            Usuarios inscriptos en{" "}
-            <span className="text-purple-700">{feria?.nombre}</span>
-          </h1>
+      <div className="bg-white rounded-xl shadow-lg px-6 py-12 md:p-12">
+        {/* Header */}
+        <div className="mb-14 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900">
+              Usuarios inscriptos
+            </h1>
+            <p className="text-gray-600 mt-2 text-lg">
+              Feria{" "}
+              <span className="text-purple-700 font-medium">
+                {feria?.nombre}
+              </span>
+            </p>
+          </div>
 
           <button
             onClick={generarListados}
-            className="px-6 py-3 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-900 transition-colors shadow-md hover:shadow-lg whitespace-nowrap w-full md:w-auto"
+            className="
+            px-6 py-3
+            bg-purple-700 text-white font-semibold
+            rounded-lg
+            hover:bg-purple-900
+            transition
+            shadow-md hover:shadow-lg
+            whitespace-nowrap
+            w-full md:w-auto
+          "
           >
             Generar listados
           </button>
         </div>
 
+        {/* Lista de usuarios */}
         {usuarios.length === 0 ? (
-          <p className="text-gray-600 text-lg text-center py-8">
+          <p className="text-gray-600 text-lg text-center py-12">
             No hay inscripciones.
           </p>
         ) : (
@@ -126,13 +144,23 @@ export default function ListadoInscriptos() {
             {usuarios.map((u) => (
               <li
                 key={u.id}
-                className="bg-gray-50 border border-gray-300 rounded-lg p-6 hover:shadow-md transition-shadow"
+                className="bg-white border border-gray-200 rounded-xl px-8 py-5 hover:shadow-md transition"
               >
-                <div>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {u.nombre}
-                  </p>
-                  <p className="text-gray-600">{u.email}</p>
+                <div className="grid grid-cols-[auto_1fr] gap-6 items-center">
+                  {/* Avatar */}
+                  <div className="w-12 h-12 rounded-full bg-purple-100 text-purple-700 font-semibold flex items-center justify-center text-lg">
+                    {u.nombre.charAt(0)}
+                  </div>
+
+                  {/* Info */}
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-gray-900 font-semibold text-lg">
+                      {u.nombre}
+                    </span>
+                    <span className="text-gray-600 text-sm truncate w-full">
+                      {u.email}
+                    </span>
+                  </div>
                 </div>
               </li>
             ))}
