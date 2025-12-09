@@ -17,6 +17,7 @@ export function adminMiddleware(req: Request, res: Response, next: NextFunction)
     }
     next();
   } catch (err) {
-    return res.status(401).json({ error: "Token inválido o expirado" });
+    // Por ahora envio un mensaje, pero deberia especificar el error real
+    return res.status(401).json({ error: "Pruebe iniciar sesión nuevamente" });
   }
 }

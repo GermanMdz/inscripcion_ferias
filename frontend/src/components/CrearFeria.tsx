@@ -70,7 +70,6 @@ export default function CrearFeria() {
                   name="nombre"
                   value={formData.nombre}
                   onChange={handleChange}
-                  placeholder="Feria de emprendedores"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-700 focus:ring-2 focus:ring-purple-700/20 transition text-gray-900"
                   required
                 />

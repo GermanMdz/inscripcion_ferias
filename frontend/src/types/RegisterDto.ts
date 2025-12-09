@@ -23,6 +23,7 @@ export interface Usuario{
   email: string;
   rubro?: string;
   telefono?: string;
+  role: string;
 }
 
 export interface DatosUsuarioIncripcion{

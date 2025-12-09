@@ -66,7 +66,7 @@ export default function ModalResultadoListados({ open, onClose, resultado, setRe
         {/* FLECHA ARRIBA */}
         {estado !== "aprobados" && (
           <button
-            className="p-2 hover:bg-purple-100 text-purple-700 rounded transition-colors"
+            className="p-2 hover:bg-purple-100 text-purple-700 rounded cursor-pointer transition-colors"
             onClick={() =>
               mover(
                 usuario,
@@ -83,7 +83,7 @@ export default function ModalResultadoListados({ open, onClose, resultado, setRe
         {/* FLECHA ABAJO */}
         {estado !== "rechazados" && (
           <button
-            className="p-2 hover:bg-red-100 text-red-700 rounded transition-colors"
+            className="p-2 hover:bg-red-100 text-red-700 rounded cursor-pointer transition-colors"
             onClick={() =>
               mover(
                 usuario,
@@ -126,7 +126,7 @@ async function guardarListados() {
   // Título de sección
   doc.setFontSize(16);
   doc.setFont("helvetica", "bold");
-  doc.setTextColor(0, 0, 0); // <-- asegurar negro para el título
+  doc.setTextColor(0, 0, 0);
   doc.text(`${titulo} (${lista.length})`, marginX, y);
   y += 10;
 
@@ -229,14 +229,14 @@ return (
       <div className="flex gap-4 justify-end pt-4">
         <button
           onClick={onClose}
-          className="px-6 py-2 bg-white rounded-lg border border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+          className="px-6 py-2 bg-white rounded-lg border border-gray-300 text-black font-semibold hover:bg-gray-200 cursor-pointer transition-colors"
         >
           Cerrar
         </button>
         {resultado && (
           <button
             onClick={guardarListados}
-            className="px-6 py-2 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-900 transition-colors shadow-md"
+            className="px-6 py-2 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-900 cursor-pointer transition-colors shadow-md"
           >
             Guardar PDF
           </button>

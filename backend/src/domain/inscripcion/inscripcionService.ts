@@ -14,7 +14,7 @@ export class InscripcionService {
 
         const existente = await obtenerInscripcionRepo(inscripcion);
         if (existente) {
-            throw new Error("La inscripcion ya existe");
+            throw new Error("Ya te inscribiste a esta feria.");
         }
         return await crearInscripcionRepo(inscripcion);
     }

@@ -102,7 +102,7 @@ export default function HomePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white rounded-lg shadow p-8 flex flex-col items-center">
-              <h3 className="text-2xl font-bold text-purple-700 mb-4 relative -translate-x-10">Requisitos</h3>
+              <h3 className="text-2xl font-bold text-purple-700 mb-4 relative -translate-x-15">📋Requisitos</h3>
               <ul className="space-y-3 text-gray-700">
                 <li>✓ Contar con un emprendimiento</li>
                 <li>✓ Proporcionar datos completos</li>
@@ -112,7 +112,7 @@ export default function HomePage() {
             </div>
 
             <div className="bg-white rounded-lg shadow p-8 flex flex-col items-center">
-              <h3 className="text-2xl font-bold text-purple-700 mb-4 relative -translate-x-10">Proceso</h3>
+              <h3 className="text-2xl font-bold text-purple-700 mb-4 relative -translate-x-18">⚙️Proceso</h3>
               <ol className="space-y-3 text-gray-700">
                 <li>1. Registrarse o iniciar sesion</li>
                 <li>2. Seleccionar una feria</li>
