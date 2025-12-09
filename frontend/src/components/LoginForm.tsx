@@ -20,7 +20,7 @@ export default function LoginForm() {
 
     try {
       await authService.login(newUser.email,newUser.password);
-      router.push("/feria");
+      router.push("/");
     } catch (e) {
       const message = e instanceof Error ? e.message : "Error desconocido";
       setError(message);
