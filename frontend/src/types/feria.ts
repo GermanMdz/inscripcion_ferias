@@ -6,4 +6,5 @@ export interface Feria {
   horaInicio: string,
   horaFin: string,
   cupo: number;
+  listasGeneradas: boolean;
 }

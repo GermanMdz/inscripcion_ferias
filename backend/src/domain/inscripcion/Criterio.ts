@@ -5,14 +5,14 @@ export abstract class Criterio {
     protected abstract ordenar(u: usuario[]): usuario[];
 
     generarListados(u: usuario[], cupo: number) {
-        const rechazados = this.obtenerRechazados(u);
+        const ordenados = this.ordenar(u);
+        
+        const rechazados = this.obtenerRechazados(ordenados);
+        const elegibles = this.obtenerElegibles(ordenados);
 
-        const elegibles = this.obtenerElegibles(u);
 
-        const ordenados = this.ordenar(elegibles);
-
-        const aprobados = this.obtenerAprobados(ordenados, cupo);
-        const listaEspera = this.obtenerListaEspera(ordenados, cupo);
+        const aprobados = this.obtenerAprobados(elegibles, cupo);
+        const listaEspera = this.obtenerListaEspera(elegibles, cupo);
 
         return { rechazados, aprobados, listaEspera };
     }
@@ -26,10 +26,10 @@ export abstract class Criterio {
     }
 
     protected obtenerElegibles(u: usuario[]) {
-        return u.filter(x => x.ultimaInscripcion !== "cancelada");
+        return u.filter(x => x.ultimaInscripcion !== "rechazado");
     }
 
     private obtenerRechazados(u: usuario[]) {
-        return u.filter(x => x.ultimaInscripcion === "cancelada");
+        return u.filter(x => x.ultimaInscripcion === "rechazado");
     }
 }

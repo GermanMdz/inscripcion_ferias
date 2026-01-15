@@ -96,14 +96,14 @@ export default function PerfilUsuario() {
         {/* Información */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t pt-6">
           <div>
-            <p className="text-sm text-gray-500">📞 Teléfono</p>
+            <p className="text-sm text-gray-500">Teléfono</p>
             <p className="text-lg font-medium text-gray-800">
               {user.telefono || "—"}
             </p>
           </div>
 
           <div>
-            <p className="text-sm text-gray-500">🏷️ Rubro</p>
+            <p className="text-sm text-gray-500">Rubro</p>
             <p className="text-lg font-medium text-gray-800">
               {user.rubro || "—"}
             </p>

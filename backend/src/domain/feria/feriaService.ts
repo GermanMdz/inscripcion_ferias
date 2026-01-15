@@ -3,7 +3,7 @@ import { obtenerUsuarioPorIdRepo } from "../../infra/repositories/usuarioReposit
 import { Feria } from "./feria";
 
 export class FeriaService {
-    
+
     async crear(feria: Feria): Promise<Feria> {
         const feriaExiste = await obtenerFeriaPorNombre(feria);
         if (feriaExiste) {
@@ -24,11 +24,13 @@ export class FeriaService {
         const ferias = await this.obtenerFerias();
         const hoy = new Date();
         hoy.setDate(hoy.getDate() - 1); // Para incluir las ferias de hoy
-        const proximas = ferias.filter((feria) => {
-            if (!feria.fecha) return false;
-            const fechaFeria = new Date(feria.fecha);
-            return fechaFeria >= hoy;
-        });
+        const proximas = ferias
+            .filter(
+                (feria) => feria.fecha && new Date(feria.fecha) >= hoy
+            )
+            .sort((a, b) => {
+                return new Date(a.fecha!).getTime() - new Date(b.fecha!).getTime();
+            });
         return proximas;
     }
 
@@ -39,7 +41,7 @@ export class FeriaService {
             throw new Error("Feria no encontrada");
         }
         return feria;
-    }    
+    }
 
     async obtenerInscripciones(feriaId: number) {
         const feria = await obtenerFeriaPorId(feriaId);

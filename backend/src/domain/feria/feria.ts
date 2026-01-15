@@ -7,6 +7,7 @@ export class Feria {
   direccion?: string | undefined;
   cupo?: number | undefined;
   createdAt?: Date | undefined;
+  listasGeneradas?: boolean;
 
   constructor(nombre: string, fecha?: Date, inicio?: string, fin?: string, direccion?: string, cupo?: number) {
     if (!nombre || nombre.trim() === "") {

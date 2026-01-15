@@ -23,6 +23,9 @@ export class FeriaEntity {
   @Column({ nullable: true })
   cupo!: number;
 
+  @Column({default: false})
+  listasGeneradas!: boolean
+
   @CreateDateColumn({ type: "timestamptz" })
   createdAt!: Date;
 }

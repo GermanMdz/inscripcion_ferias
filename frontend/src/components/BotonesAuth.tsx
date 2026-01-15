@@ -11,24 +11,37 @@ type BotonesAuthProps = {
   onAction?: () => void;
 };
 
-export default function BotonesAuth({onAction}: BotonesAuthProps) {
+export default function BotonesAuth({ onAction }: BotonesAuthProps) {
   const pathname = usePathname();
   const [user, setUser] = useState<Usuario>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchUser() {
+      setLoading(true);
       try {
         const me = await authService.me();
         setUser(me);
       } catch {
         setUser(undefined);
+      } finally {
+        setLoading(false);
       }
     }
     fetchUser();
   }, [pathname]);
 
+  if (loading) {
+  return (
+    <div className="flex items-center gap-4 animate-pulse">
+      <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+      <div className="h-5 w-32 bg-gray-200 rounded"></div>
+    </div>
+  );
+}
+
   if (user) {
-    return <Perfil nombre={user.nombre} onAction={onAction}/>;
+    return <Perfil nombre={user.nombre} onAction={onAction} />;
   }
 
   return (

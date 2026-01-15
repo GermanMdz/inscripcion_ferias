@@ -1,59 +1,34 @@
+import { authFetch } from "./authFetch";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const inscripcionService = {
   subscribe: async (usuarioId: number, feriaId: number) => {
     const token = obtenerToken();
-    const res = await fetch(`${API_URL}/feria/inscribir`, {
-      method: "POST",
+    const res = await authFetch(`${API_URL}/feria/inscribir`, "POST", {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "69420"
       },
-      credentials: "include",
       body: JSON.stringify({ usuarioId, feriaId }),
     });
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(`Error al inscribirse a la feria: ${errorData.error}`);
-    }
-    return res.json();
+    return setResponce(res);
   },
 
   getSubscriptions: async (id: number) => {
     const token = obtenerToken();
-    const res = await fetch(`${API_URL}/feria/${id}/inscripciones`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "69420"
-      },
-      credentials: "include",
+    const res = await authFetch(`${API_URL}/feria/${id}/inscripciones`, "GET", {
+      headers: { "Authorization": `Bearer ${token}` }
     });
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(`Error al obtener las inscripciones de la feria. ${errorData.error}`);
-    }
-    return res.json();
+    return setResponce(res);
   },
 
   generarListados: async (id: number, criterio: string) => {
     const token = obtenerToken();
-    const res = await fetch(`${API_URL}/feria/${id}/inscripciones/${criterio}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "69420"
-      },
-      credentials: "include",
+    const res = await authFetch(`${API_URL}/feria/${id}/inscripciones/${criterio}`, "GET", {
+      headers: { "Authorization": `Bearer ${token}` }
     });
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(`Error al obtener las inscripciones de la feria. ${errorData.error}`);
-    }
-    return res.json();
+    return setResponce(res);
   }
 };
 
@@ -62,4 +37,11 @@ function obtenerToken() {
     .split("; ")
     .find((row) => row.startsWith("token="))
     ?.split("=")[1];
+}
+async function setResponce(res: Response) {
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error);
+  }
+  return data;
 }

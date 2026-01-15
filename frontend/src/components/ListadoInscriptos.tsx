@@ -100,6 +100,7 @@ export default function ListadoInscriptos() {
         onClose={() => setShowResultado(false)}
         resultado={resultado}
         setResultado={setResultado}
+        feria={feria!}
       />
 
       <div className="bg-white rounded-xl shadow-lg px-6 py-12 md:p-12">
@@ -110,7 +111,6 @@ export default function ListadoInscriptos() {
               Usuarios inscriptos
             </h1>
             <p className="text-gray-600 mt-2 text-lg">
-              Feria{" "}
               <span className="text-purple-700 font-medium">
                 {feria?.nombre}
               </span>

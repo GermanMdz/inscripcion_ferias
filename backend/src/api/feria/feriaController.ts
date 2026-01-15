@@ -77,14 +77,13 @@ export const obtenerListadoPorLlegada = async (req: Request, res: Response) => {
 };
 
 export const obtenerListadoPorPrioridad = async (req: Request, res: Response) => {
-    // TODO: implementar orden por prioridad en dominio
-    // try {
-    //     const id = parseInt(req.params.id!);
-    //     const usuarios = await inscripcionService.obtenerListadoPorPrioridad(id);
-    //     return res.status(200).json(usuarios);
-    // } catch (e: any) {
-    //     return res.status(400).json({ error: e.message });
-    // }
+    try {
+        const id = parseInt(req.params.id!);
+        const usuarios = await inscripcionService.obtenerListadoPorPrioridad(id);
+        return res.status(200).json(usuarios);
+    } catch (e: any) {
+        return res.status(400).json({ error: e.message });
+    }
 };
 
 // export const obtenerInscripcion = async (req: Request, res: Response) => {

@@ -1,12 +1,28 @@
-import { crearUsuarioRepo } from "../../infra/repositories/usuarioRepository";
+import { actualizarUsuarioRepo, crearUsuarioRepo, obtenerUsuarioPorIdRepo } from "../../infra/repositories/usuarioRepository";
 import { Usuario } from "./usuario";
+type CampoActualizable = "ultimaInscripcion" | "email" | "nombre";
 
 export class UsuarioService {
-    
+
     async crear(nombre: string): Promise<Usuario> {
         const domain = new Usuario(nombre);
         return await crearUsuarioRepo(domain);
     }
+
+    async obtenerUsuario(id: number): Promise<Usuario> {
+        const usuario = await obtenerUsuarioPorIdRepo(id);
+        if (!usuario) {
+            throw new Error("Usuario no encontrado");
+        }
+        return usuario;
+    }
+
+    async actualizarUsuario(id: number,campo: CampoActualizable,valor: string) {
+        const usuario = await this.obtenerUsuario(id);
+        usuario[campo] = valor as any;
+        return actualizarUsuarioRepo(usuario);
+    }
+
 
     // async inscribirUsuarioAFeria(userId: number, feriaId: number) {
     //     const usuario = await usuarioRepo.findById(userId);

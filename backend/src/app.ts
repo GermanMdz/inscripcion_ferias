@@ -27,8 +27,6 @@ app.use(cookieParser());
 // LOG MIDDLEWARE - para debuguear
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
-  console.log(`Host: ${req.get('host')}`);
-  console.log(`Origin: ${req.get('origin')}`);
   next();
 });
 

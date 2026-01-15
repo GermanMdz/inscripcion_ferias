@@ -3,6 +3,8 @@ import { obtenerInscripcionRepo, crearInscripcionRepo, obtenerInscripcionesRepo 
 import { obtenerFeriaPorId as obtenerFeriaPorIdRepo } from "../../infra/repositories/feriaRepository";
 import { Inscripcion } from "./Inscripcion";
 import { OrdenLlegada } from "./OrdenLlegada";
+import { PrioridadInicial, PrioridadRegenerada  } from "./Prioridad";
+import { Criterio } from "./Criterio";
 
 export class InscripcionService {
     async inscribirUsuarioAFeria(usuarioId: number, feriaId: number) {
@@ -34,9 +36,9 @@ export class InscripcionService {
     async obtenerListadoPorPrioridad(feriaId: number) {
         const feria = await obtenerFeriaPorIdRepo(feriaId);
         if (!feria) throw new Error("Feria no existe");
+        const criterio = (!feria.listasGeneradas) ? new PrioridadInicial() : new PrioridadRegenerada();
         const usuarios = await obtenerInscripcionesRepo(feriaId);
-        // const criterio = new OrdenPrioridad();
-        // return criterio.generarListados(usuarios, feria.cupo!);
+        return criterio.generarListados(usuarios, feria.cupo!);
     }
 }
 

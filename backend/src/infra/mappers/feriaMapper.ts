@@ -9,6 +9,7 @@ export class feriaMapper {
         feria.horaFin = entity.horaFin;
         feria.direccion = entity.direccion;
         feria.cupo = entity.cupo;
+        feria.listasGeneradas = entity.listasGeneradas
         feria.createdAt = entity.createdAt;
         return feria;
     }
@@ -21,6 +22,7 @@ export class feriaMapper {
             horaFin: domain.horaFin,
             direccion: domain.direccion,
             cupo: domain.cupo,
+            listasGeneradas: domain.listasGeneradas,
             createdAt: domain.createdAt,
         };
     }

@@ -1,4 +1,5 @@
 import { RegisterDto } from "@/types/RegisterDto";
+import { authFetch } from "./authFetch";
 
 export const authService = {
     login: async (email: string, password: string) => {
@@ -10,7 +11,7 @@ export const authService = {
         });
         if (!res.ok) {
           const errorData = await res.json();
-          throw new Error(`Error al iniciar sesión: ${errorData.error}`);
+          throw new Error(errorData.error);
         }
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/;`;
@@ -26,7 +27,6 @@ export const authService = {
         if (!res.ok) {
             throw new Error(`Error al cerrar sesión: ${data.error}`);
         }
-        // const data = await res.json();
         document.cookie = "token=; Max-Age=0; path=/";
         return data;
     },
@@ -40,7 +40,7 @@ export const authService = {
         });
         if (!res.ok) {
             const errorData = await res.json();
-            throw new Error(`Error al iniciar sesión: ${errorData.error}`);
+            throw new Error(errorData.error);
         }
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/;`;
@@ -67,8 +67,7 @@ export const authService = {
         .find((row) => row.startsWith("token="))
         ?.split("=")[1];
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
-            method: "POST",
+        const res = await authFetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, "POST", {
             headers: { 
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -77,7 +76,7 @@ export const authService = {
         });
         if (!res.ok) {
             const errorData = await res.json();
-            throw new Error(`Error al obtener datos del usuario: ${errorData.error}`);
+            throw new Error("Primero debes iniciar sesion");
         }
         const data = await res.json();
         return data;

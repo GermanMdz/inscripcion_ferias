@@ -1,4 +1,5 @@
 import { Feria } from "@/types/feria";
+import { mapearFechaCorta } from "@/utils/mapearFecha";
 import Link from "next/link";
 
 interface FeriaCardProps {
@@ -17,7 +18,7 @@ export default function FeriaCard({ feria }: FeriaCardProps) {
           📍 {feria.direccion}
         </p>
         <p className="text-gray-600">
-          🕐 {feria.horaInicio} – {feria.horaFin}
+          📆 {mapearFechaCorta(feria.fecha)}
         </p>
       </div>
 

@@ -16,6 +16,6 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
     next();
   } catch (err) {
     // Por ahora envio un mensaje, pero deberia especificar el error real
-    return res.status(401).json({ error: "Pruebe iniciar sesión nuevamente" });
+    return res.status(401).json({ error: "Access-Token expirado" });
   }
 }

@@ -10,6 +10,7 @@ export class UsuarioMapper {
     usuario.role = entity.role;
     usuario.telefono = entity.telefono;
     usuario.rubro = entity.rubro;
+    usuario.ultimaInscripcion = entity.ultimaInscripcion,
     usuario.createdAt = entity.createdAt;
     return usuario;
   }
@@ -22,6 +23,7 @@ export class UsuarioMapper {
       role: usuario.role!,
       telefono: usuario.telefono!,
       rubro: usuario.rubro!,
+      ultimaInscripcion: usuario.ultimaInscripcion!
     };
   }
 

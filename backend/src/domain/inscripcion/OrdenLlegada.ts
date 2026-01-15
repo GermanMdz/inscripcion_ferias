@@ -4,6 +4,9 @@ import { Criterio } from "./Criterio";
 
 export class OrdenLlegada extends Criterio {
     ordenar(u: usuario[]): usuario[] {
-        return u.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
+        const copia = [...u];
+        copia.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+        return copia;
     }
+
 }
