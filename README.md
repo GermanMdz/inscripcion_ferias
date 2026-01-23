@@ -22,11 +22,11 @@
 
 #### Diagrama de Grantt
 
-![Diagrama de grantt](img/grantt.png)
+![Diagrama de grantt](docs/grantt.png)
 
 #### Desglose de tareas
 
-![](img/tareas.png)
+![](docs/tareas.png)
 
 #### Requerimientos funcionales
 
@@ -66,12 +66,12 @@
 
 ##### Capas
 
-![](img/arquitectura.png)
+![](docs/arquitectura.png)
 
 **Nota**: el admin tambien puede editar la lista de inscriptos y asignarle a un usuario el estado que considere apropiado.
 
 ##### Diagrama Entidad Ralacion
 
-![](img/der.png)
+![](docs/der.png)
 
 **Posibles estados de la inscripcion**: iniciada, aprobada, en_espera, cancelada.
