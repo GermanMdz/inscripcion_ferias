@@ -45,6 +45,28 @@ export const obtenerFeriaPorId = async (req: Request, res: Response) => {
     }
 };
 
+export const actualizarFeria = async (req: Request, res: Response) => {
+    try {
+        const id = parseInt(req.params.id!);
+        const body = req.body || {};
+        const feria = await feriaService.obtenerFeriaPorId(id);
+        // Merge provided fields
+        if (body.nombre !== undefined) feria.nombre = body.nombre;
+        if (body.fecha !== undefined) feria.fecha = body.fecha;
+        if (body.horaInicio !== undefined) feria.horaInicio = body.horaInicio;
+        if (body.horaFin !== undefined) feria.horaFin = body.horaFin;
+        if (body.direccion !== undefined) feria.direccion = body.direccion;
+        if (body.cupo !== undefined) feria.cupo = body.cupo;
+        if (body.listasGeneradas !== undefined) feria.listasGeneradas = body.listasGeneradas;
+
+        const updated = await feriaService.actualizar(feria);
+        const feriaDto = feriaMapper.fromDomainToDto(updated);
+        return res.status(200).json(feriaDto);
+    } catch (e: any) {
+        return res.status(400).json({ error: e.message });
+    }
+};
+
 export const inscribirUsuarioAFeria = async (req: Request, res: Response) => {
     try {
         const usuarioId = req.body.usuarioId

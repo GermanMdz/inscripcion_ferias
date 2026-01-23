@@ -24,6 +24,7 @@ export default function ListadoInscriptos() {
     aprobados: DatosUsuarioIncripcion[];
     listaEspera: DatosUsuarioIncripcion[];
     rechazados: DatosUsuarioIncripcion[];
+    proximos: DatosUsuarioIncripcion[];
   } | null>(null);
   const [showResultado, setShowResultado] = useState(false);
 

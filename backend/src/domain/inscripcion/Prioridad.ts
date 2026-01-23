@@ -46,9 +46,10 @@ export class PrioridadRegenerada extends Criterio {
         const confirmados = u.filter(user => user.ultimaInscripcion === "confirmado");
         const listaEspera = u.filter(user => user.ultimaInscripcion === "suplente");
         const rechazados = u.filter(user => user.ultimaInscripcion === "rechazado");
+        const proximos = u.filter(user => user.ultimaInscripcion === "proximo");
 
         const aprobados = [...confirmados, ...pendientes];
-        return { rechazados, aprobados, listaEspera }
+        return { rechazados, aprobados, listaEspera, proximos }
     }
 
 }

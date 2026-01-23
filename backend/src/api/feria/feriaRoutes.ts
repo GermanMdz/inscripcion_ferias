@@ -16,6 +16,7 @@ router.get("/:id/inscripciones/llegada", adminMiddleware, feriaController.obtene
 router.get("/:id/inscripciones/prioridad", adminMiddleware, feriaController.obtenerListadoPorPrioridad);
 router.post("/cantidad", feriaController.cantidadFeria);
 router.get("/:id", feriaController.obtenerFeriaPorId);
+router.patch("/:id", adminMiddleware, feriaController.actualizarFeria);
 // router.post("/crear", feriaController.crearFeria);
 
 export default router;

@@ -6,6 +6,7 @@ export class Usuario {
     role?: 'admin' | 'user';
     rubro?: string | undefined;
     ultimaInscripcion?: string;
+    ultimaInscripcionFeriaId?: number | undefined;
     telefono?: string | undefined;
     createdAt?: Date;
 
@@ -21,5 +22,6 @@ export interface DatosUsuarioIncripcion{
     rubro: string;
     telefono: string;
     ultimaInscripcion: string;
+    ultimaInscripcionFeriaId?: number;
     createdAt: Date;
 }

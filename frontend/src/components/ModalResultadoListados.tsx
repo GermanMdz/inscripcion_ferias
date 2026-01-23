@@ -9,6 +9,7 @@ type ResultadoListas = {
   aprobados: DatosUsuarioIncripcion[];
   listaEspera: DatosUsuarioIncripcion[];
   rechazados: DatosUsuarioIncripcion[];
+  proximos: DatosUsuarioIncripcion[];
 };
 type ListaKey = keyof ResultadoListas;
 
@@ -25,13 +26,21 @@ export default function ModalResultadoListados({
     aprobados: DatosUsuarioIncripcion[];
     listaEspera: DatosUsuarioIncripcion[];
     rechazados: DatosUsuarioIncripcion[];
+    proximos: DatosUsuarioIncripcion[];
   } | null;
   setResultado: (r: ResultadoListas) => void;
   feria: Feria;
 }) {
   if (!open || !resultado) return null;
 
-  const { aprobados, listaEspera, rechazados } = resultado;
+  const data = {
+    aprobados: resultado.aprobados ?? [],
+    listaEspera: resultado.listaEspera ?? [],
+    rechazados: resultado.rechazados ?? [],
+    proximos: resultado.proximos ?? [],
+  };
+
+  const { aprobados, listaEspera, rechazados, proximos } = data;
 
   function mover(
     usuario: DatosUsuarioIncripcion,
@@ -42,6 +51,7 @@ export default function ModalResultadoListados({
       aprobados: [...aprobados],
       listaEspera: [...listaEspera],
       rechazados: [...rechazados],
+      proximos: [...proximos],
     };
     nuevo[desde] = nuevo[desde].filter((u) => u.id !== usuario.id);
     nuevo[hacia].push(usuario);
@@ -158,15 +168,15 @@ export default function ModalResultadoListados({
     };
 
     // ORDEN
-    resultado.aprobados.sort((a, b) => a.nombre.localeCompare(b.nombre));
-    resultado.listaEspera.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    aprobados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    listaEspera.sort((a, b) => a.nombre.localeCompare(b.nombre));
 
     // ========= CONFIRMADOS (con rubro) =========
     const { general, gastronomico } = agruparPorRubro(resultado.aprobados);
 
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
-    doc.text(`Confirmados (${resultado.aprobados.length})`, marginX, y);
+    doc.text(`Confirmados (${aprobados.length})`, marginX, y);
     y += 10;
 
     imprimirUsuarios(general);
@@ -186,7 +196,7 @@ export default function ModalResultadoListados({
     // ========= SUPLENTES (sin rubro) =========
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
-    doc.text(`Suplentes (${resultado.listaEspera.length})`, marginX, y);
+    doc.text(`Suplentes (${listaEspera.length})`, marginX, y);
     y += 10;
 
     imprimirUsuarios(resultado.listaEspera);
@@ -199,13 +209,18 @@ export default function ModalResultadoListados({
       const actualizar = (users: DatosUsuarioIncripcion[], estado: string) =>
         Promise.all(
           users.map((u) =>
-            usuarioService.actualizar(u.id, "ultimaInscripcion", estado)
+            usuarioService.actualizar(
+              u.id,
+              "ultimaInscripcion",
+              estado,
+              feria.id
+            )
           )
         );
 
-      await actualizar(resultado.aprobados, "confirmado");
-      await actualizar(resultado.listaEspera, "suplente");
-      await actualizar(resultado.rechazados, "rechazado");
+      await actualizar(aprobados, "confirmado");
+      await actualizar(listaEspera, "suplente");
+      await actualizar(rechazados, "rechazado");
     } catch (err) {
       console.error(err);
     }
@@ -335,6 +350,34 @@ export default function ModalResultadoListados({
                     </>
                   );
                 })()}
+              </ul>
+            )}
+          </section>
+
+          {/* PROXIMO / PENALIZADOS */}
+          <section className="mb-8">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              Penalizaciones ({proximos.length})
+            </h3>
+
+            <p className="text-sm text-gray-600 mb-4">
+              No participan en esta feria quienes hayan faltado a la anterior
+              feria sin justificación.
+            </p>
+
+            {proximos.length === 0 ? (
+              <p className="text-gray-500 italic">Ninguno</p>
+            ) : (
+              <ul className="space-y-3">
+                {proximos.map((u) => (
+                  <li
+                    key={u.id}
+                    className="bg-gray-100 border border-gray-300 rounded-lg p-4"
+                  >
+                    <p className="font-semibold text-gray-900">{u.nombre}</p>
+                    <p className="text-gray-600 text-sm">{u.email}</p>
+                  </li>
+                ))}
               </ul>
             )}
           </section>

@@ -13,8 +13,9 @@ export abstract class Criterio {
 
         const aprobados = this.obtenerAprobados(elegibles, cupo);
         const listaEspera = this.obtenerListaEspera(elegibles, cupo);
+        const proximos = ordenados.filter(x => x.ultimaInscripcion === "proximo");
 
-        return { rechazados, aprobados, listaEspera };
+        return { rechazados, aprobados, listaEspera, proximos };
     }
 
     protected obtenerListaEspera(ordenados: usuario[], cupo: number) {

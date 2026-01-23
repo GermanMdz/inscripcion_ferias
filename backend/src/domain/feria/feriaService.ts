@@ -1,4 +1,4 @@
-import { crearFeriaRepo, obtenerCantidadRepo, obtenerFeriasRepo, obtenerFeriaPorNombre, obtenerFeriaPorId } from "../../infra/repositories/feriaRepository";
+import { crearFeriaRepo, obtenerCantidadRepo, obtenerFeriasRepo, obtenerFeriaPorNombre, obtenerFeriaPorId, actualizarFeriaRepo, obtenerFeriaAnteriorRepo } from "../../infra/repositories/feriaRepository";
 import { obtenerUsuarioPorIdRepo } from "../../infra/repositories/usuarioRepository";
 import { Feria } from "./feria";
 
@@ -43,10 +43,31 @@ export class FeriaService {
         return feria;
     }
 
+    async actualizar(feria: Feria): Promise<Feria> {
+        // Verificar existencia
+        const existing = await obtenerFeriaPorId(feria.id!);
+        if (!existing) throw new Error("Feria no encontrada");
+        return await actualizarFeriaRepo(feria);
+    }
+
     async obtenerInscripciones(feriaId: number) {
         const feria = await obtenerFeriaPorId(feriaId);
         if (!feria) throw new Error("La feria no existe");
         throw new Error("Esta funcionalidad ha sido movida a InscripcionService");
+    }
+
+    async obtenerFeriaAnterior(feriaId: number): Promise<Feria | null> {
+        return await obtenerFeriaAnteriorRepo(feriaId);
+    }
+
+    async marcarListasGeneradas(feriaId: number) {
+        const f = await obtenerFeriaPorId(feriaId);
+        if (!f) throw new Error("Feria no encontrada");
+        if (!f.listasGeneradas) {
+            f.listasGeneradas = true;
+            return await actualizarFeriaRepo(f);
+        }
+        return f;
     }
 
     async obtenerCantidad(): Promise<{ cantidad: number }> {

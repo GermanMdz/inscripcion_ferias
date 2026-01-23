@@ -44,4 +44,30 @@ export async function obtenerInscripcionesRepo(feriaId: number) {
     throw new Error("Esta funcionalidad ha sido movida a InscripcionRepository");
 }
 
+export async function actualizarFeriaRepo(domainFeria: Feria) {
+    const r = repo();
+    if (!domainFeria.id) throw new Error("Feria id es requerido para actualizar");
+    const found = await r.findOneBy({ id: domainFeria.id });
+    if (!found) throw new Error("Feria no encontrada");
+
+    const toUpdate = feriaMapper.fromDomainToEntity(domainFeria);
+    // Merge only provided values
+    const merged = { ...found, ...toUpdate };
+    const saved = await r.save(merged);
+    return feriaMapper.fromEntityToDomain(saved);
+}
+
+export async function obtenerFeriaAnteriorRepo(feriaId: number) {
+    const r = repo();
+    const current = await r.findOneBy({ id: feriaId });
+    if (!current || !current.fecha) return null;
+    const prev = await r
+        .createQueryBuilder("f")
+        .where("f.fecha < :fecha", { fecha: current.fecha })
+        .orderBy("f.fecha", "DESC")
+        .getOne();
+    if (!prev) return null;
+    return feriaMapper.fromEntityToDomain(prev as any);
+}
+
 export default repo;

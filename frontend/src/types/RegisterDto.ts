@@ -33,5 +33,6 @@ export interface DatosUsuarioIncripcion{
     rubro: string;
     telefono: string;
     ultimaInscripcion: string;
+      ultimaInscripcionFeriaId?: number; // Added for UI to work with new field
     createdAt: Date;
 }

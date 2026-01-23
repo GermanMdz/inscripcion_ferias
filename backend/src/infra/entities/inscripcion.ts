@@ -18,8 +18,8 @@ export class InscripcionEntity {
   @JoinColumn({ name: "feria_id" })
   feria!: FeriaEntity;
 
-  @Column({ type: "enum", enum: ["pendiente", "aprobada", "en lista de espera", "rechazada"], default: "pendiente" })
-  estado!: "pendiente" | "aprobada" | "en lista de espera" | "rechazada";
+  @Column({ type: "enum", enum: ["pendiente", "confirmado", "suplente", "rechazado"], default: "pendiente" })
+  estado!: "pendiente" | "confirmado" | "suplente" | "rechazado";
 
   @CreateDateColumn({ type: "timestamptz" })
   createdAt!: Date;

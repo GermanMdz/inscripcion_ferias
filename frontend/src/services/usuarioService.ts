@@ -3,14 +3,16 @@ import { authFetch } from "./authFetch";
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const usuarioService = {
-  actualizar: async (id: number, campo:string, valor:string) => {
+  actualizar: async (id: number, campo:string, valor:string, feriaId?: number) => {
     const token = obtenerToken();
+    const body: any = { id, campo, valor };
+    if (feriaId !== undefined) body.feriaId = feriaId;
     const res = await authFetch(`${API_URL}/usuario/actualizar`, "PUT", {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
       },
-      body: JSON.stringify({ id, campo, valor })
+      body: JSON.stringify(body)
     });
     return setResponce(res);
   },

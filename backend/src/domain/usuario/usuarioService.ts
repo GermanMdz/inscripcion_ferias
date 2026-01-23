@@ -1,4 +1,4 @@
-import { actualizarUsuarioRepo, crearUsuarioRepo, obtenerUsuarioPorIdRepo } from "../../infra/repositories/usuarioRepository";
+import { actualizarUsuarioRepo, crearUsuarioRepo, obtenerUsuarioPorIdRepo, obtenerTodosUsuariosRepo } from "../../infra/repositories/usuarioRepository";
 import { Usuario } from "./usuario";
 type CampoActualizable = "ultimaInscripcion" | "email" | "nombre";
 
@@ -17,9 +17,21 @@ export class UsuarioService {
         return usuario;
     }
 
-    async actualizarUsuario(id: number,campo: CampoActualizable,valor: string) {
+    async obtenerTodosUsuarios(): Promise<Usuario[]> {
+        return await obtenerTodosUsuariosRepo();
+    }
+
+    async actualizarUsuario(id: number,campo: CampoActualizable,valor: string, feriaId?: number) {
         const usuario = await this.obtenerUsuario(id);
         usuario[campo] = valor as any;
+        if (campo === "ultimaInscripcion") {
+            if (valor === "rechazado") {
+                usuario.ultimaInscripcionFeriaId = feriaId;
+            } else {
+                // cuando se setea otro estado, clear the feria reference
+                usuario.ultimaInscripcionFeriaId = undefined;
+            }
+        }
         return actualizarUsuarioRepo(usuario);
     }
 

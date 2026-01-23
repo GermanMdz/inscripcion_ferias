@@ -1,3 +1,4 @@
+import e from 'express';
 import { AppDataSource } from '../../data-source';
 import { Usuario } from '../../domain/usuario/usuario';
 import { UsuarioEntity } from '../entities/usuarioEntity';
@@ -25,6 +26,23 @@ export async function obtenerUsuarioPorIdRepo(id: number): Promise<Usuario | nul
   if (!entity) return null;
   return UsuarioMapper.fromEntityToDomain(entity);
 }
+
+export async function obtenerTodosUsuariosRepo(): Promise<Usuario[]> {
+  const repo = getRepo();
+  const entities = await repo.find();
+  return entities.map(e => UsuarioMapper.fromEntityToDomain(e));
+}
+
+export async function actualizarEstadoInscripcionesRepo(usuarios: Usuario[]) {
+  const repo = getRepo();
+  for (const u of usuarios) {
+    await repo.update(u.id!, {
+      ultimaInscripcion: u.ultimaInscripcion!
+    });
+    console.log(`Usuario ${u.id} actualizado a estado ${u.ultimaInscripcion}`);
+  }
+}
+
 
 export async function actualizarUsuarioRepo(usuario: Usuario): Promise<Usuario> {
   const repo = getRepo();

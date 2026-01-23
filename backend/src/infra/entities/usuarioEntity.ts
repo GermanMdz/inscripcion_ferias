@@ -26,6 +26,9 @@ export class UsuarioEntity {
   @Column({ nullable: true, default: 'pendiente' })
   ultimaInscripcion!: string;
 
+  @Column({ nullable: true })
+  ultimaInscripcionFeriaId?: number;
+
   @CreateDateColumn({ type: "timestamptz" })
   createdAt!: Date;
 }
