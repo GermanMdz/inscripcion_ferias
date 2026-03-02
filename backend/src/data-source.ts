@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER || "postgres",
   password: process.env.DB_PASS || "admin",
   database: process.env.DB_NAME || "inscripcion_ferias",
-  synchronize: true, // usar true solo en desarrollo
+  // synchronize: true, // usar true solo en desarrollo
   logging: false,
   entities: [FeriaEntity, UsuarioEntity, InscripcionEntity],
   migrations: [__dirname + "/migrations/*.{ts,js}"],
