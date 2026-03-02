@@ -74,4 +74,4 @@
 
 ![](docs/der.png)
 
-**Posibles estados de la inscripcion**: iniciada, aprobada, en_espera, cancelada.
+**Posibles estados de la inscripcion**: pendiente, confirmado, suplente, rechazado.

@@ -1,7 +1,7 @@
 export class Inscripcion {
   usuarioId?: number;
   feriaId?: number;
-  estado?: "pendiente" | "aprobada" | "en lista de espera" | "rechazada";
+  estado?: "pendiente" | "confirmado" | "suplente" | "rechazado";
   createdAt?: Date | undefined;
 
   constructor(usuarioId: number, feriaId:number) {
