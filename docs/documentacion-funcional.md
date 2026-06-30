@@ -22,11 +22,11 @@
 
 #### Diagrama de Grantt
 
-![Diagrama de grantt](docs/grantt.png)
+![Diagrama de grantt](grantt.png)
 
 #### Desglose de tareas
 
-![](docs/tareas.png)
+![](tareas.png)
 
 #### Requerimientos funcionales
 
