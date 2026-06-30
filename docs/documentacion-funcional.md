@@ -66,13 +66,13 @@
 
 ##### Capas
 
-![](docs/arquitectura.png)
+![](arquitectura.png)
 
 **Nota**: el admin tambien puede editar la lista de inscriptos y asignarle a un usuario el estado que considere apropiado.
 
 ##### Diagrama Entidad Ralacion
 
-![](docs/der.png)
+![](der.png)
 
 **Posibles estados de la inscripcion**: pendiente, confirmado, suplente, rechazado.
 
