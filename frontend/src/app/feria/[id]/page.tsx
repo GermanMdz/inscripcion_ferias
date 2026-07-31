@@ -28,7 +28,7 @@ export default function GetFeria() {
 
   // TODO: agregar url de imagen en la base de datos
   const imagen =
-    "https://instagram.faep6-1.fna.fbcdn.net/v/t51.82787-15/583048393_17866480173493255_86627275770999194_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&cb=8438d1d6-0aee74db&ig_cache_key=Mzc2OTMzODU0MjM1MTYwODUxNA%3D%3D.3-ccb7-5-cb8438d1d6-0aee74db&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0MDR4MTc1My5zZHIuQzMifQ%3D%3D&_nc_ohc=ME4t3MXskLkQ7kNvwGclYpR&_nc_oc=AdnOhuLJalbtTlP9_7U_-3-jVT_YEzqjNH5awMS9xDXLxhSPcaJA1j4N2iyQ53I0Tp8PfqxbciOurqgCeL_SQH-H&_nc_zt=23&_nc_ht=instagram.faep6-1.fna&_nc_gid=diq2WaKgZCFG3MLqo_zL1Q&oh=00_Afk6CXOVl-cz85lge2ZswX4E8daxexEbjnzR_hfhKwF6gQ&oe=693E1629";
+    "https://instagram.faep7-1.fna.fbcdn.net/v/t51.82787-15/707886592_17890684020493255_391802684757180165_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ig_cache_key=MzkwNjIzNTAwOTQxMjM3MzMxMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTI1NC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=NT0sGKDYoM4Q7kNvwFhS6l8&_nc_oc=Adr9nGYxUnq4jFc-kIltNvTWNq-_mVHcQ1wZQGRZfeC31I1lVIJgZfy5-7ByZWqPU_sew8rIcviSWLEw_YF-mS7s&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.faep7-1.fna&_nc_gid=ScIsG7XHGLLw_p1QzPiw-g&_nc_ss=7a22e&oh=00_AQG8VN-7h5ttNaMNtbsaWBN3xcCA0t2YnJzPc0kEFeOxRQ&oe=6A72BA52";
   useEffect(() => {
     const fetchFeria = async () => {
       try {
